@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Both React and ReactDOM CDN. -->
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<!-- Babel -->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<!-- Styles -->
+	 <link rel="stylesheet" href="../../css/reset.css">
+	<link rel="stylesheet" href="../css/task.css">
+	<title>Задача 04</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Задача 04</h1>
+		<div class="task">
+			<p>“Рахунок у банку” Вимоги:</p>
+			<ul>
+				<li>Спочатку сума дорівнює 0грн. Змінити суму у гривнях можна або зарахуванням на рахунок, або зняттям.</li>
+				<li>Сума автоматично переводиться у долари та євро (фіксований курс задається у data).</li>
+				<li>Можливість зарахувати суму (контролювати, щоб не була від’ємною)</li>
+				<li>Можливість зняти (щоб не можна зняти більше ніж є на рахунку)</li>
+				<li>При виконанні зняття і зарахування коштів вираховувати 3% від суми (відображати кількість відсотків автоматично)</li>
+			</ul>
+			<p>При зміні суми :</p>
+			<ul>
+				<li>Якщо було зняття, то суму відображати червоним</li>
+				<li>Якщо було зарахування, то суму відображати зеленим</li>
+				<li>Якщо сума валюти менша за 100 то відображати червоним кольором, інакше - зеленим</li>
+			</ul>
+		</div>
+		<h2>Результат</h2>
+		<div id="root"></div>
+	</div>
+	<script type="text/babel"></script>
+</body>
+
+</html>

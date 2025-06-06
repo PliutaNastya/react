@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Both React and ReactDOM CDN. -->
+	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<!-- Babel -->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<!-- Styles -->
+	 <link rel="stylesheet" href="../../css/reset.css">
+	<link rel="stylesheet" href="../css/task.css">
+	<title>Задача 01</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Задача 01</h1>
+		<div class="task">
+			<p>Вводиться кількість пасажирів. Вивести:</p>
+			<ul>
+				<li>скільки потрібно автобусів (кожен автобус на 20 місць)</li>
+				<li>скільки пляшок води (кожному пасажиру 2 пляшки)</li>
+				<li>скільки бутербродів (кожному пасажиру 3 бутерброди)</li>
+			</ul>
+		</div>
+		<h2>Результат</h2>
+		<div id="root"></div>
+	</div>
+	<script type="text/babel">
+
+		// Створюю компонент
+		function BusManager() {
+			return (
+				<div className="bus-cnt">
+					<input type="number" />
+					<p>{`На  пасажирів необхідно  автобусів.`}</p>
+					<p>{`На  пасажирів необхідно  пляшок води.`}</p>
+					<p>{`На  пасажирів необхідно  бутербродів.`}</p>
+				</div>
+			)
+		}
+
+		// Створюю головний компонент App
+		function App() {
+			return (
+				<React.Fragment>
+					<BusManager />
+				</React.Fragment>
+			)
+		}
+
+		// Рендерю компонент App в DOM
+		ReactDOM.render(<App />, document.getElementById('root'))
+	</script>
+</body>
+
+</html>
