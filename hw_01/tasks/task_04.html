@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Both React and ReactDOM CDN. -->
+	<!-- Підключення React та ReactDOM з CDN. -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<!-- Babel -->
+	<!-- Підключення Babel для трансформації JSX у JavaScript у браузері -->
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<!-- Styles -->
-	 <link rel="stylesheet" href="../../css/reset.css">
+	<!-- Підключення стилів -->
+	<link rel="stylesheet" href="../../css/reset.css">
 	<link rel="stylesheet" href="../css/task.css">
 	<title>Задача 04</title>
 </head>
@@ -37,7 +37,116 @@
 		<h2>Результат</h2>
 		<div id="root"></div>
 	</div>
-	<script type="text/babel"></script>
+	<script type="text/babel">
+
+		// Створюю компонент
+		function BankAccountManager() {
+			// Об'єкт з курсом валют та відсотком комісії
+			const data = {
+				euro: 45,
+				dol: 40,
+				percent: 3
+			}
+
+			// Стан для збереження суми на рахунку, введеної суми, останньої дії (зарахування/зняття), комісії та суми з врахуванням комісії, використовуючи хук useState
+			const [sum, setSum] = React.useState(0)
+			const [value, setValue] = React.useState(0)
+			const [lastAction, setLastAction] = React.useState(null)
+			const [comission, setComission] = React.useState(0)
+			const [sumWithFee, setSumWithFee] = React.useState(0)
+
+			// Загальна функція для розрахунку комісії
+			const getComission = (sumAmount) => {
+				return (sumAmount * data.percent) / 100
+			}
+
+			// Відслідковування змін та зміна стану комісії та суми з врахуванням комісії, щоб під час введення суми показувати результат
+			const handleChange = (e) => {
+				const newValue = parseFloat(e.target.value)
+				setValue(newValue)
+
+				if (!isNaN(newValue) && newValue >= 0) {
+					setComission(getComission(newValue))
+					setSumWithFee(newValue + getComission(newValue))
+				} else {
+					setComission(0)
+					setSumWithFee(0)
+				}
+			}
+
+			// Функція для оновлення суми на рахунку після зарахування
+			const getNewSumAfterAdding = () => {
+
+				if (!value) return
+				const fee = getComission(value)
+
+				setSum((prevSum) => prevSum + (value - fee))
+				setLastAction('add')
+			}
+
+			// Функція для оновлення суми після зняття
+			const getNewSumAfterWithdraw = () => {
+				if (!value) return
+
+				const fee = getComission(value)
+				const totalWithraw = value + fee
+
+				if (totalWithraw > sum) return
+
+				setSum((prevSum) => prevSum - totalWithraw)
+				setLastAction('withdraw')
+			}
+
+			// Функція для розрахунку суми у валюті
+			const getSumInCurrency = (key) => {
+				return sum / data[key]
+			}
+
+			// Функція для визначення кольору суми з врахуванням того яка дія була виконана
+			const getColor = () => lastAction === 'add' ? 'green' : 'red'
+
+			// Функція для визначення кольору суми у валюті з врахуванням того вона менша чи більша за якесь значення
+			const getColorForCurrency = (key, maxValue) => {
+				const sumInCurrency = getSumInCurrency(key)
+				return sumInCurrency > maxValue ? 'green' : 'red'
+			}
+
+			// Рендерю JSX-розмітку
+			return (
+				<div className="cnt">
+					<input
+						type="number"
+						placeholder="Введіть суму грошей"
+						onChange={(e) => handleChange(e)}
+					/>
+					<button type="button" onClick={getNewSumAfterAdding}>Зарахувати</button>
+					<button type="button" onClick={getNewSumAfterWithdraw}>Зняти</button>
+					<p>{`Комісія - ${comission.toFixed(2)} грн`}</p>
+					<p>{`Сума до зняття/зарахування з врахуванням комісії - ${sumWithFee.toFixed(2)} грн`}</p>
+					<div className="sum-cnt">
+						<p>Сума на вашому рахунку складає:</p>
+						<div>
+							<span style={{ color: getColor() }}>{`${sum.toFixed(2)} грн`}</span>
+							<span style={{ color: getColorForCurrency('euro', 100) }}>{`${getSumInCurrency('euro').toFixed(2)} євро`}</span>
+							<span style={{ color: getColorForCurrency('dol', 100) }}>{`${getSumInCurrency('dol').toFixed(2)} доларів`}</span>
+						</div>
+					</div>
+				</div>
+			)
+		}
+
+		// Створюю головний компонент App
+		function App() {
+			return (
+				<React.Fragment>
+					<BankAccountManager />
+				</React.Fragment>
+			)
+		}
+
+		// Рендерю компонент App в DOM
+		ReactDOM.render(<App />, document.getElementById('root'))
+	</script>
 </body>
 
 </html>
