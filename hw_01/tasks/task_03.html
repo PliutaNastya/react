@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Both React and ReactDOM CDN. -->
+	<!-- Підключення React та ReactDOM з CDN. -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<!-- Babel -->
+	<!-- Підключення Babel для трансформації JSX у JavaScript у браузері -->
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<!-- Styles -->
-	 <link rel="stylesheet" href="../../css/reset.css">
+	<!-- Підключення стилів -->
+	<link rel="stylesheet" href="../../css/reset.css">
 	<link rel="stylesheet" href="../css/task.css">
 	<title>Задача 03</title>
 </head>
@@ -24,7 +24,59 @@
 		<h2>Результат</h2>
 		<div id="root"></div>
 	</div>
-	<script type="text/babel"></script>
+	<script type="text/babel">
+
+		// Створюю компонент
+		function RandomNumberManager() {
+
+			// Стан для збереження початкового і кінцевого значення числового діапазону, а також рандомного числу, використовуючи хук useState
+			const [startNum, setStartNum] = React.useState(0)
+			const [endNum, setEndNum] = React.useState(0)
+			const [randomNum, setRandomNum] = React.useState(null)
+
+			const getRandomNum = () => {
+				let min = parseInt(startNum)
+				let max = parseInt(endNum)
+
+				if (!isNaN(min) && !isNaN(max)) {
+					if (min > max) [min, max] = [max, min]
+
+					const result = Math.floor(Math.random() * (max - min + 1)) + min
+					setRandomNum(result)
+				}
+			}
+
+			// Рендерю JSX-розмітку
+			return (
+				<div className="cnt">
+					<input
+						type="number"
+						placeholder="Введіть початок діапазону"
+						onChange={(e) => setStartNum(e.target.value)}
+					/>
+					<input
+						type="number"
+						placeholder="Введіть кінець діапазону"
+						onChange={(e) => setEndNum(e.target.value)}
+					/>
+					<button type="button" onClick={getRandomNum}>Отримати рандомне число</button>
+					{randomNum !== null && <div>{`Випадкове число: ${randomNum}`}</div>}
+				</div>
+			)
+		}
+
+		// Створюю головний компонент App
+		function App() {
+			return (
+				<React.Fragment>
+					<RandomNumberManager />
+				</React.Fragment>
+			)
+		}
+
+		// Рендерю компонент App в DOM
+		ReactDOM.render(<App />, document.getElementById('root'))
+	</script>
 </body>
 
 </html>

@@ -39,7 +39,7 @@ h2 {
 		}
 	}
 }
-.bus-cnt {
+.cnt {
 	display: grid;
 	row-gap: 0.9375rem;
 	input {
@@ -49,6 +49,7 @@ h2 {
 
 		&::placeholder {
 			color: #fff;
+			font-size: 1rem;
 		}
 
 		@media (any-hover: hover), (pointer: fine) {
@@ -80,5 +81,15 @@ h2 {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+}
+button {
+	padding: 10px 20px;
+	background-color: #001f40;
+	transition: background-color 0.3s ease;
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			background-color: #52a1f5;
+		}
 	}
 }
