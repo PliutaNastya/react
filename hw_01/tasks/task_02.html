@@ -29,7 +29,7 @@
 		// Створюю компонент
 		function MonthManager() {
 			// Створюю об'єкт з необхідними даними
-			const seasonData= {
+			const seasonData = {
 				winter: {
 					clothes: ['Пальто', 'Шапка', 'Рукавички', 'Чоботи'],
 					imageSrc: '../img/winter.avif'
@@ -78,17 +78,19 @@
 					// Якщо результат є масивом - то одразу переводжу в рядок
 					return Array.isArray(result) ? result.join(', ') : result
 				} else return ''
-
 			}
 
 			// Функція для перевірки введених даних
 			const handleMonthChange = (e) => {
-				const value = parseInt(e.target.value)
-				if (value >= 1 && value <= 12 || e.target.value === '') {
-					setMonth(e.target.value)
-				} else {
+				const value = e.target.value
+				const monthNum = parseInt(value)
+
+				if (value === '') {
 					setMonth('')
-					e.target.value = ''
+					return
+				}
+				if (monthNum >= 1 && monthNum <= 12 && !isNaN(monthNum)) {
+					setMonth(monthNum)
 				}
 			}
 
@@ -99,6 +101,7 @@
 						type="number"
 						min={1}
 						max={12}
+						value={month}
 						placeholder="Введіть номер місяця"
 						onChange={(e) => handleMonthChange(e)}
 					/>

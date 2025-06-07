@@ -51,7 +51,7 @@
 
 			// Функція для перевірки можливості авторизації
 			const isCanAuthorize = (dataList) => {
-				const canAuthorize = dataList.some(userData => userData.login === login && userData.password === password)
+				const canAuthorize = dataList.some(userData => userData.login.toLowerCase() === login.trim().toLowerCase() && userData.password === password.trim())
 				setLoginPossibility(canAuthorize)
 			}
 

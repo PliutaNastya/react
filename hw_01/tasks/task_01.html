@@ -46,6 +46,16 @@
 			const getWaterBottlesAmount = () => parseInt(passengers) * BOTTLE_PER_PERSON
 			const getSandwichesAmount = () => parseInt(passengers) * SANDWICH_PER_PERSON
 
+			// Функція для перевірки введених даних
+			const handleChange = (e) => {
+				const value = parseInt(e.target.value)
+				if (!isNaN(value) && value >= 0) {
+					setPassengers(value)
+				} else {
+					setPassengers(0)
+				}
+			}
+
 			// Рендерю JSX-розмітку
 			return (
 				<div className="cnt">
@@ -53,7 +63,7 @@
 						type="number"
 						min={0}
 						placeholder="Введіть кількість пасажирів"
-						onChange={(e) => setPassengers(e.target.value)}
+						onChange={(e) => handleChange(e)}
 					/>
 					<p>{`На ${passengers} пасажирів необхідно ${getBusAmount()} автобусів.`}</p>
 					<p>{`На ${passengers} пасажирів необхідно ${getWaterBottlesAmount()} пляшок води.`}</p>

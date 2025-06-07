@@ -97,6 +97,7 @@ button {
 .sum-cnt {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	column-gap: 0.625rem;
 	div {
 		display: grid;
 		row-gap: 0.625rem;
