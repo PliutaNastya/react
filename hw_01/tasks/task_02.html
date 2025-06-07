@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Both React and ReactDOM CDN. -->
+	<!-- Підключення React та ReactDOM з CDN. -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<!-- Babel -->
+	<!-- Підключення Babel для трансформації JSX у JavaScript у браузері -->
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<!-- Styles -->
-	 <link rel="stylesheet" href="../../css/reset.css">
+	<!-- Підключення стилів -->
+	<link rel="stylesheet" href="../../css/reset.css">
 	<link rel="stylesheet" href="../css/task.css">
 	<title>Задача 02</title>
 </head>
@@ -24,7 +24,104 @@
 		<h2>Результат</h2>
 		<div id="root"></div>
 	</div>
-	<script type="text/babel"></script>
+	<script type="text/babel">
+
+		// Створюю компонент
+		function MonthManager() {
+			// Створюю масив з необхідними даними
+			const seasonData= {
+				winter: {
+					clothes: ['Пальто', 'Шапка', 'Рукавички', 'Чоботи'],
+					imageSrc: '../img/winter.avif'
+				},
+				spring: {
+					clothes: ['Куртка', 'Шапка'],
+					imageSrc: '../img/spring.avif'
+				},
+				summer: {
+					clothes: ['Шорти', 'Футболка', 'Сукні'],
+					imageSrc: '../img/summer.avif'
+				},
+				autumn: {
+					clothes: ['Куртка', 'Шапка'],
+					imageSrc: '../img/autumn.avif'
+				},
+			}
+
+			// Стан для збереження місяця, використовуючи хук useState
+			const [month, setMonth] = React.useState('')
+
+			// Функція для отримання сезону на основі введеного місяця
+			const getSeason = () => {
+				const monthNum = parseInt(month)
+				let season = ''
+
+				if (monthNum < 3 || monthNum === 12) {
+					season = 'winter'
+				} else if (monthNum < 6) {
+					season = 'spring'
+				} else if (monthNum < 9) {
+					season = 'summer'
+				} else if (monthNum < 13) {
+					season = 'autumn'
+				} else season = ''
+
+				return season
+			}
+
+			// Функція для отримання потрібного елементу (одяг або адресу картинки)
+			const getElement = (obj, element) => {
+				const season = getSeason()
+				if (season) {
+					const result = obj[season][element]
+
+					// Якщо результат є масивом - то одразу переводжу в рядок
+					return Array.isArray(result) ? result.join(', ') : result
+				} else return ''
+
+			}
+
+			// Функція для перевірки введених даних
+			const handleMonthChange = (e) => {
+				const value = parseInt(e.target.value)
+				if (value >= 1 && value <= 12 || e.target.value === '') {
+					setMonth(e.target.value)
+				} else {
+					setMonth('')
+					e.target.value = ''
+				}
+			}
+
+			// Рендерю JSX-розмітку
+			return (
+				<div className="bus-cnt">
+					<input
+						type="number"
+						min={1}
+						max={12}
+						placeholder="Введіть номер місяця"
+						onChange={(e) => handleMonthChange(e)}
+					/>
+					{getSeason() && <p>{`Сезон: ${getSeason()}. Необхідний одяг - ${getElement(seasonData, 'clothes')}`}</p>}
+					<div className='image'>
+						{getSeason() && <img src={`${getElement(seasonData, 'imageSrc')}`} alt={`Forest in ${getSeason()}`} />}
+					</div>
+				</div>
+			)
+		}
+
+		// Створюю головний компонент App
+		function App() {
+			return (
+				<React.Fragment>
+					<MonthManager />
+				</React.Fragment>
+			)
+		}
+
+		// Рендерю компонент App в DOM
+		ReactDOM.render(<App />, document.getElementById('root'))
+	</script>
 </body>
 
 </html>
