@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Both React and ReactDOM CDN. -->
+	<!-- Підключення React та ReactDOM з CDN. -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<!-- Babel -->
+	<!-- Підключення Babel для трансформації JSX у JavaScript у браузері -->
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<!-- Styles -->
-	 <link rel="stylesheet" href="../../css/reset.css">
+	<!-- Підключення стилів -->
+	<link rel="stylesheet" href="../../css/reset.css">
 	<link rel="stylesheet" href="../css/task.css">
 	<title>Задача 05</title>
 </head>
@@ -24,7 +24,88 @@
 		<h2>Результат</h2>
 		<div id="root"></div>
 	</div>
-	<script type="text/babel"></script>
+	<script type="text/babel">
+
+		// Створюю компонент
+		function LogInManager() {
+
+			const usersDataList = [
+				{
+					login: 'login01',
+					password: 'password01'
+				},
+				{
+					login: 'login02',
+					password: 'password02'
+				},
+				{
+					login: 'login03',
+					password: 'password03'
+				},
+			]
+			
+
+			const [login, setLogin] = React.useState('')
+			const [password, setPassword] = React.useState('')
+			const [loginPossibility, setLoginPossibility] = React.useState(null)
+
+			// Функція для перевірки можливості авторизації
+			const isCanAuthorize = (dataList) => {
+				const canAuthorize = dataList.some(userData => userData.login === login && userData.password === password)
+				setLoginPossibility(canAuthorize)
+			}
+
+			// Функція для показу/приховування паролю
+			const showHidePassword = (e) => {
+				const passIconBtn = e.target
+				const passInput = passIconBtn.previousElementSibling
+				const isHidden = passInput.type === 'password'
+				
+				passInput.type = isHidden ? 'text' : 'password'
+				passIconBtn.classList.toggle('pass-show', !isHidden)
+				passIconBtn.classList.toggle('pass-hide', isHidden)
+			}
+
+			// Рендерю JSX-розмітку
+			return (
+				<div className="cnt">
+					<label htmlFor="username">Введіть свій логін</label>
+					<input
+						type="text"
+						id='username'
+						value={login}
+						autoComplete='off'
+						onChange={(e) => setLogin(e.target.value)}
+					/>
+					<label className="label-pass">
+						Введіть свій пароль
+						<input
+							type="password"
+							id='password'
+							value={password}
+							autoComplete='off'
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<button type='button' className="pass-btn pass-show" aria-label='Show/Hide password' onClick={showHidePassword}></button>
+					</label>
+					<button type="button" onClick={() => isCanAuthorize(usersDataList)}>Перевірити можливість входу</button>
+					{loginPossibility !== null && <p>{`${loginPossibility ? 'Ви можете увійти.' : 'Ви не можете увійти. Треба зареєструватися.'}`}</p>}
+				</div>
+			)
+		}
+
+		// Створюю головний компонент App
+		function App() {
+			return (
+				<React.Fragment>
+					<LogInManager />
+				</React.Fragment>
+			)
+		}
+
+		// Рендерю компонент App в DOM
+		ReactDOM.render(<App />, document.getElementById('root'))
+	</script>
 </body>
 
 </html>

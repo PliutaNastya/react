@@ -102,3 +102,29 @@ button {
 		row-gap: 0.625rem;
 	}
 }
+.label-pass {
+	display: block;
+	position: relative;
+}
+.pass-btn {
+	position: absolute;
+	padding: 0;
+	bottom: 9px;
+	right: 25px;
+	width: 25px;
+	aspect-ratio: 1;
+	transition: transform 0.3s ease;
+
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			transform: scale(0.9);
+		}
+	}
+
+	&.pass-show {
+		background: url('../img/pass_show.svg') center / contain no-repeat;
+	}
+	&.pass-hide {
+		background: url('../img/pass_hide.svg') center / contain no-repeat;
+	}
+}
