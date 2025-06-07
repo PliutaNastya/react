@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Both React and ReactDOM CDN. -->
+	<!-- Підключення React та ReactDOM з CDN. -->
 	<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-	<!-- Babel -->
+	<!-- Підключення Babel для трансформації JSX у JavaScript у браузері -->
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<!-- Styles -->
-	 <link rel="stylesheet" href="../../css/reset.css">
+	<!-- Підключення стилів -->
+	<link rel="stylesheet" href="../../css/reset.css">
 	<link rel="stylesheet" href="../css/task.css">
 	<title>Задача 01</title>
 </head>
@@ -33,12 +33,31 @@
 
 		// Створюю компонент
 		function BusManager() {
+			// Сталі константи
+			const BUS_CAPACITY = 20
+			const BOTTLE_PER_PERSON = 2
+			const SANDWICH_PER_PERSON = 3
+
+			// Стан для збереження кількості пасажирів, використовуючи хук useState
+			const [passengers, setPassengers] = React.useState(0)
+
+			// Створюю функції для розрахунку необхідних параметрів
+			const getBusAmount = () => Math.ceil(parseInt(passengers) / BUS_CAPACITY)
+			const getWaterBottlesAmount = () => parseInt(passengers) * BOTTLE_PER_PERSON
+			const getSandwichesAmount = () => parseInt(passengers) * SANDWICH_PER_PERSON
+
+			// Рендерю JSX-розмітку
 			return (
 				<div className="bus-cnt">
-					<input type="number" />
-					<p>{`На  пасажирів необхідно  автобусів.`}</p>
-					<p>{`На  пасажирів необхідно  пляшок води.`}</p>
-					<p>{`На  пасажирів необхідно  бутербродів.`}</p>
+					<input
+						type="number"
+						min={0}
+						placeholder="Введіть кількість пасажирів"
+						onChange={(e) => setPassengers(e.target.value)}
+					/>
+					<p>{`На ${passengers} пасажирів необхідно ${getBusAmount()} автобусів.`}</p>
+					<p>{`На ${passengers} пасажирів необхідно ${getWaterBottlesAmount()} пляшок води.`}</p>
+					<p>{`На ${passengers} пасажирів необхідно ${getSandwichesAmount()} бутербродів.`}</p>
 				</div>
 			)
 		}
