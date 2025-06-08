@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,regular,700&display=swap");
+html,
 body {
-	font-family: 'Montserrat', sans-serif;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	font-family: "Montserrat", sans-serif;
 	color: #eee;
 	background-color: black;
 	transition: 0.3s ease-out;
 	width: 100%;
-	overflow: hidden;
 	overscroll-behavior: none;
 	position: relative;
 
@@ -45,13 +49,12 @@ body {
 .pin-wrap {
 	width: max-content;
 	height: 70vh;
-	display: grid;
-	grid-auto-flow: column;
+	display: inline-flex;
 	column-gap: 50px;
 	padding: 1.25rem 9.375rem 1.25rem 1.25rem;
 }
 .cards__title {
-	min-width: 400px;
+	width: 400px;
 	line-height: 1.2;
 	align-self: center;
 	flex-shrink: 0;
@@ -122,4 +125,3 @@ body {
 	color: aqua;
 	font-size: 2rem;
 }
-

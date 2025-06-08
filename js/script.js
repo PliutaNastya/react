@@ -25,7 +25,7 @@ ScrollTrigger.scrollerProxy(pageContainer, {
 			height: window.innerHeight
 		};
 	},
-	pinType: pageContainer.style.transform ? "transform" : "fixed"
+	pinType: "transform"
 })
 
 window.addEventListener("load", function () {
@@ -33,6 +33,9 @@ window.addEventListener("load", function () {
 		let pinWrap = document.querySelector(".pin-wrap")
 		let pinWrapWidth = pinWrap.scrollWidth
 		let horizontalScrollLength = pinWrapWidth - window.innerWidth
+
+		console.log('pinWrapWidth:', pinWrapWidth)
+		console.log('horizontalScrollLength:', horizontalScrollLength)
 
 		gsap.to(".pin-wrap", {
 			scrollTrigger: {
@@ -51,4 +54,5 @@ window.addEventListener("load", function () {
 		ScrollTrigger.addEventListener("refresh", () => scroller.update())
 		ScrollTrigger.refresh()
 	}, 100)
+
 })
