@@ -1,0 +1,22 @@
+@use '../base/variables' as *;
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin btnHover {
+	color: $accentTextColor;
+	opacity: 0.75;
+	filter: drop-shadow(0px 0px 3px #1e1e1e) drop-shadow(-0px -0px 3px #3e3e3e);
+}
+@mixin focus {
+	outline: 1px solid $accentTextColor;
+	opacity: 0.75;
+	filter: drop-shadow(0px 0px 3px #1e1e1e) drop-shadow(-0px -0px 3px #3e3e3e);
+}
+@mixin btnStyles {
+	padding: 0.875rem 1.75rem;
+	border-radius: 0.8125rem;
+	box-shadow: $boxShadowInset;
+	transition: all 0.3s ease;
+}

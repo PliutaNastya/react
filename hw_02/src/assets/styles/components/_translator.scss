@@ -1,0 +1,64 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+.translator-cnt {
+	padding: clamp(0.938rem, 2.796vw - 0.856rem, 2.5rem);
+	box-shadow: $boxShadowOuter;
+	display: grid;
+	align-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr));
+	column-gap: 3.125rem;
+	row-gap: 0.9375rem;
+}
+.question {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	row-gap: 0.9375rem;
+	.image-cnt {
+		justify-self: center;
+		width: 50%;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		border: 7px solid $borderColor;
+		box-shadow: $boxShadowBorder;
+		@include center;
+
+		img {
+			width: 80%;
+			height: 80%;
+			object-fit: contain;
+		}
+	}
+	p {
+		text-transform: capitalize;
+		justify-self: center;
+		padding: 0.625rem 2.8125rem;
+		text-align: center;
+		color: $accentTextColor;
+		box-shadow: $boxShadowInset;
+	}
+}
+.answer {
+	display: grid;
+	row-gap: 15px;
+	align-self: start;
+	p {
+		color: $accentTextColor;
+	}
+}
+.quiz-actions {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 15px;
+	.button {
+		width: 100%;
+	}
+}
+.green {
+	filter: drop-shadow(1px 1px 15px green);
+}
+.red {
+	filter: drop-shadow(1px 1px 15px red);
+}

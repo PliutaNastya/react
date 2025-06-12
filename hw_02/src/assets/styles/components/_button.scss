@@ -1,0 +1,22 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+.button {
+	@include btnStyles;
+	@include center;
+
+	&:hover{
+		@include btnHover;
+	}
+
+	&:focus {
+		@include focus;
+	}
+}
+button:disabled {
+	color: #eee;
+	opacity: 0.5;
+	&:hover{
+		color: #eee;
+		opacity: 0.5;
+	}
+}

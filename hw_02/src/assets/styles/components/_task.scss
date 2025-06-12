@@ -1,0 +1,38 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+.task {
+	padding: 1.25rem;
+	box-shadow: $boxShadowOuter;
+
+	h2 {
+		text-align: center;
+		font-size: 1.5rem;
+		color: $accentTextColor;
+
+		&:not(:last-child) {
+			margin-block-end: 15px;
+		}
+	}
+
+	.task-inner {
+		padding: 0.9375rem;
+		box-shadow: $boxShadowInset;
+
+		display: grid;
+		row-gap: 1.5625rem;
+
+		ul {
+			margin-inline-start: 1.875rem;
+			li {
+				list-style: lower-alpha;
+				&:not(:last-child) {
+					margin-block-end: 0.625rem;
+				}
+			}
+		}
+	}
+
+	&:not(:last-child) {
+		margin-block-end: 35px;
+	}
+}

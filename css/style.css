@@ -49,7 +49,7 @@ section {
 .cards {
 	overflow-x: auto;
 	scroll-snap-type: mandatory;
-	height: 70vh;
+	height: 80svh;
 	display: flex;
 	column-gap: 50px;
 	padding: 1.25rem 9.375rem 1.25rem 1.25rem;

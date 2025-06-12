@@ -1,33 +1,29 @@
+import './App.scss'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import MenuList from './components/MenuList'
+import LoginManager from './components/LoginManager'
+import Translator from './components/Translator'
+import List from './components/List'
+import DataArray from './components/DataArray'
+import TicketsManager from './components/TicketsManager/TicketsManager'
+import KitchenOrdersManager from './components/KitchenOrdersManager/KitchenOrdersManager'
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [activeTask, setActiveTask] = useState(1)
 
 	return (
 		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
+			<header className="header">
+				<MenuList onSelect={setActiveTask} />
+			</header>
+			<main>
+				{activeTask === 1 && <LoginManager />}
+				{activeTask === 2 && <TicketsManager />}
+				{activeTask === 3 && <Translator />}
+				{activeTask === 4 && <List />}
+				{activeTask === 5 && <DataArray />}
+				{activeTask === 6 && <KitchenOrdersManager />}
+			</main>
 		</>
 	)
 }

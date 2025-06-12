@@ -1,0 +1,10 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+.list-cnt {
+	padding: 0.9375rem 1.25rem;
+	box-shadow: $boxShadowInset;
+
+	& > *:not(:last-child) {
+		margin-block-end: 15px;
+	}
+}
