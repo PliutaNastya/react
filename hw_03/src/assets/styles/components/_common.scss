@@ -1,0 +1,220 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,regular,700&display=swap");
+
+body {
+	font-family: "Montserrat", sans-serif;
+	line-height: 1.3;
+	color: $primaryTextColor;
+	background-color: $primaryBgColor;
+}
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0rem 0.9375rem 3.125rem;
+}
+h2 {
+	&:not(:last-child) {
+		margin-block-end: 15px;
+	}
+}
+button {
+	width: 100%;
+	@include btnStyles;
+	@include center;
+
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			@include btnHover;
+		}
+	}
+
+	&:focus {
+		@include focus;
+	}
+	&:disabled {
+		opacity: 0.5;
+		pointer-events: none;
+		cursor: not-allowed;
+	 }
+}
+input, select {
+	padding: 15px;
+	border: 1px solid $borderColor;
+	border-radius: 13px;
+	font: inherit;
+	background-color: $primaryBgColor;
+	color: #fff;
+	width: 100%;
+
+	&:focus-visible {
+		@include focus;
+	}
+}
+label {
+	display: inline-block;
+	&:not(:last-child) {
+		margin-block-end: 15px;
+	}
+}
+td {
+	width: 40px;
+	height: 40px;
+	// background-color: #7700795b;
+	cursor: pointer;
+}
+.task-cnt {
+	ul {
+		margin-left: 30px;
+		li {
+			list-style-type: lower-latin;
+		}
+	}
+}
+*::placeholder {
+	color: $accentTextColor;
+	opacity: 0.7;
+}
+.speed {
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 10px;
+	width: 200px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	box-shadow: $boxShadowBtn;
+	input {
+		flex-shrink: 0;
+		width: 50%;
+		height: 50%;
+		border-radius: 50%;
+		font-size: 32px;
+		text-align: center;
+	}
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+		-moz-appearance: textfield; // Firefox
+		appearance: none;
+	}
+}
+.blink {
+	font-weight: 700;
+	color: red;
+	animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}
+.athletes-cnt {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 20px;
+	row-gap: 50px;
+
+	ul {
+		padding: 15px;
+		display: grid;
+		align-self: start;
+		row-gap: 15px;
+		flex: 1 1 400px;
+		box-shadow: $boxShadowForCnt
+	}
+	li {
+		align-self: start;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		align-items: center;
+		
+		column-gap: 15px;
+		row-gap: 5px;
+
+		button {
+			flex: 0 1 300px;
+		}
+	}
+}
+.dance-cnt, .translator-cnt {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));;
+	column-gap: 20px;
+	row-gap: 50px;
+	ul {
+		padding: 15px;
+		display: grid;
+		align-self: start;
+		row-gap: 15px;
+		box-shadow: $boxShadowForCnt
+	}
+	li {
+		padding: 10px;
+		border: 1px solid $borderColor;
+		cursor: pointer;
+	}
+	button {
+		grid-column: 1 / -1;
+	}
+}
+.chosen {
+	ul {
+		padding: 15px;
+		display: grid;
+		align-self: start;
+		row-gap: 15px;
+		box-shadow: $boxShadowForCnt
+	}
+	li {
+		padding: 10px;
+		border: 1px solid $borderColor;
+		display: grid;
+		align-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		column-gap: 10px;
+	}
+}
+.employee-list {
+	padding: 15px;
+	display: grid;
+	row-gap: 15px;
+	box-shadow: $boxShadowForCnt
+}
+.filters-cnt {
+	display: grid;
+	row-gap: 15px;
+}
+.game-cnt {
+	max-width: 300px;
+	margin-inline: auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	input {
+		text-align: center;
+	}
+}
+li {
+	transition: border 0.3s ease;
+}
+li.red {
+	border: 3px solid red;
+}
+li.blue {
+	border: 3px solid blue;
+}
+li.green {
+	border: 3px solid green;
+}
+.cell {
+	width: 50px;
+	aspect-ratio: 1;
+}
