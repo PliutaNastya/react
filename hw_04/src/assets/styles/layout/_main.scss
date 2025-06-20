@@ -1,0 +1,13 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+main {
+	display: grid;
+	row-gap: 15px;
+}
+.main-cnt, .task-cnt {
+	padding: 1.875rem;
+	box-shadow: $boxShadowForCnt;
+
+	display: grid;
+	row-gap: 15px;
+}
