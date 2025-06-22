@@ -74,7 +74,7 @@ function NumberGuessManager() {
 				{/* Виводжу картки гравців */}
 				<div className={styles.cards}>
 					{players.map(player => (
-						<PlayerCard key={player.id} id={player.id} isLoser={player.isLoser} onGuess={onGuess} title={player.title} isActive={player.isActive} player={players} guessedNums={player.guessedNums} setPlayers={setPlayers} usedNumbers={usedNumbers} setUsedNumbers={setUsedNumbers} secretNum={secretNum} />
+						<PlayerCard key={player.id} player={player} onGuess={onGuess} setPlayers={setPlayers} usedNumbers={usedNumbers} setUsedNumbers={setUsedNumbers} secretNum={secretNum} />
 					))}
 				</div>
 			</div>

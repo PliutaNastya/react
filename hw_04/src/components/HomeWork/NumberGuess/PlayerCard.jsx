@@ -1,7 +1,9 @@
 import styles from "./NumberGuessManager.module.css"
 import { useState } from "react"
 
-function PlayerCard({ title, id, isActive, isLoser, guessedNums, usedNumbers, onGuess, setPlayers, secretNum, setUsedNumbers}) {
+function PlayerCard({ player, onGuess, setPlayers, usedNumbers, setUsedNumbers, secretNum }) {
+	const { title, id, isActive, isLoser, guessedNums } = player
+
 	const [userNumber, setUserNumber] = useState('')
 
 	const handleChange = (e) => {

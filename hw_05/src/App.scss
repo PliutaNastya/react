@@ -1,0 +1,10 @@
+@use './assets/styles/index' as *;
+@use './assets/styles/base/variables' as *;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0rem 0.9375rem 3.125rem;
+}
+body {
+	background-color: $primaryBgColor;
+}
