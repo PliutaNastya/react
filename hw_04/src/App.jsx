@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import './App.scss'
 import MenuList from './components/MenuList'
-import MessengerManager from './components/HomeWork03/Messenger/MessengerManager'
-import NumberGuessManager from './components/HomeWork03/NumberGuess/NumberGuessManager'
+import MessengerManager from './components/HomeWork/Messenger/MessengerManager'
+import NumberGuessManager from './components/HomeWork/NumberGuess/NumberGuessManager'
 import LessonTask01 from './components/Lesson/LessonTask01'
 import LessonTask02 from './components/Lesson/LessonTask02'
 import LessonTask03 from './components/Lesson/LessonTask03'
-import LessonTask04 from './components/Lesson/LessonTask04'
-import LessonTask05 from './components/Lesson/LessonTask05'
+import ProductsList from './components/Lesson/Products/ProductsList'
+import { products } from './data/productsList'
+import DataCard from './components/Lesson/DataCard/DataCard'
+import TodoManager from './components/Lesson/Todo/TodoManager'
+import ReverseComp from './components/Lesson/Reverse/ReverseComp'
+import ReverseCompMap from './components/Lesson/Reverse/ReverseCompMap'
+import ReverseCompReverse from './components/Lesson/Reverse/ReverseCompReverse'
 
 function App() {
 	const [activeCategory, setActiveCategory] = useState(null)
@@ -53,6 +58,14 @@ function App() {
 		{
 			id: 5,
 			name: 'Задача 05'
+		},
+		{
+			id: 6,
+			name: 'Задача 06'
+		},
+		{
+			id: 7,
+			name: 'Задача 07'
 		}
 	]
 
@@ -63,6 +76,12 @@ function App() {
 	const handleBack = () => {
 		setActiveCategory(null)
 		setActiveTask(null)
+	}
+
+	const userData = {
+		name: 'Anastasiia',
+		age: 29,
+		isActive: true,
 	}
 
 	return (
@@ -81,11 +100,82 @@ function App() {
 			</header>
 			<main>
 				{/* Задачі з уроку */}
-				{activeCategory === 1 && activeTask === 1 && < LessonTask01 />}
-				{activeCategory === 1 && activeTask === 2 && < LessonTask02 />}
-				{activeCategory === 1 && activeTask === 3 && < LessonTask03 />}
-				{activeCategory === 1 && activeTask === 4 && < LessonTask04 />}
-				{activeCategory === 1 && activeTask === 5 && < LessonTask05 />}
+				{activeCategory === 1 && activeTask === 1 && < LessonTask01 name='Anastasiia' age={29} isActive={true} />}
+				{/* або якщо є об'єкт з даними (погано для читабельності) */}
+				{activeCategory === 1 && activeTask === 1 && < LessonTask01 {...userData} />}
+
+				{/* ProductsList */}
+				{activeCategory === 1 && activeTask === 2 && < ProductsList productsList={products} />}
+
+				{/* Передача React-елементів (через children prop) */}
+				{activeCategory === 1 && activeTask === 3 &&
+					<>
+						<LessonTask02 title="Panel 1">
+							<p>1111</p>
+							<p>222</p>
+							<p>333</p>
+						</LessonTask02>
+
+						<LessonTask02 title="Panel 2">
+							<p>1111</p>
+							<p>222</p>
+							<p>333</p>
+						</LessonTask02>
+					</>
+				}
+
+				{/* Явні (іменовані) пропси */}
+				{activeCategory === 1 && activeTask === 4 &&
+					<>
+						<DataCard
+							logo={'https://fruit-time.ua/images/products/5a/yabluko-fudzi.jpeg '}
+							badgeText="акція"
+							title="Samsumg"
+						>
+							<div>Text</div>
+						</DataCard>
+						<DataCard
+							logo={'https://fruit-time.ua/images/products/5a/yabluko-fudzi.jpeg '}
+							badgeText="акція"
+							title="Samsumg"
+							footer={<div>Price: 2000грн.</div>}
+						>
+							<img style={{ width: '100%' }} src="https://fruit-time.ua/images/products/5a/yabluko-fudzi.jpeg" />
+						</DataCard>
+					</>
+				}
+
+				{/* Передача даних з дочірнього у батківський через children-функції */}
+				{activeCategory === 1 && activeTask === 5 &&
+					<LessonTask03 url="https://jsonplaceholder.typicode.com/todos/1">
+						{(data) => (
+							<>
+								<div>{data.id}</div>
+								<div>{data.title}</div>
+							</>
+						)}
+					</LessonTask03>
+				}
+
+				{/* React.Children */}
+				{activeCategory === 1 && activeTask === 6 &&
+					<>
+						<ReverseComp>
+							<p>1111</p>
+							<p>2222</p>
+							<p>3333</p>
+						</ReverseComp>
+						<ReverseCompMap>
+							<p>1111</p>
+						</ReverseCompMap>
+						<ReverseCompReverse>
+							<p>1111</p>
+						</ReverseCompReverse>
+					</>
+				}
+
+				{/* Передача функцій (для колбеків) */}
+				{activeCategory === 1 && activeTask === 7 && < TodoManager />}
 
 				{/* Задачі на перевірку */}
 				{activeCategory === 2 && activeTask === 1 && < MessengerManager />}

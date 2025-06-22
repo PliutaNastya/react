@@ -1,0 +1,25 @@
+.container {
+  border: 2px solid green;
+  padding: 20px;
+  border-radius: 20px;
+  .img {
+    width: 100%;
+	 aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .logo {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+  }
+  .header {
+    display: flex;
+	 gap: 20px;
+    justify-content: space-between;
+  }
+}
+.prodCnt {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
