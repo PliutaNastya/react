@@ -50,9 +50,9 @@ function NumberGuessManager() {
 		setSecretNum(String(randomNum))
 	}, [])
 
-	const onGuess = (playerId) => {
+	const onGuess = (playerId, updatePlayers) => {
 		// знаходжу всі вгадані цифри обох гравців
-		const allGuessedNums = players.map(player => player.guessedNums).flat()
+		const allGuessedNums = updatePlayers.map(player => player.guessedNums).flat()
 		// якщо всі вони відповідають загаданому числу
 		const isAllGuessed = secretNum.split("").every(num => allGuessedNums.includes(parseInt(num)))
 		// то визначаю програвшого
@@ -64,6 +64,8 @@ function NumberGuessManager() {
 		} 
 	}
 
+	const isGameOver = players.some(player => player.isLoser)
+
 	console.log(players)
 
 	return (
@@ -74,7 +76,7 @@ function NumberGuessManager() {
 				{/* Виводжу картки гравців */}
 				<div className={styles.cards}>
 					{players.map(player => (
-						<PlayerCard key={player.id} player={player} onGuess={onGuess} setPlayers={setPlayers} usedNumbers={usedNumbers} setUsedNumbers={setUsedNumbers} secretNum={secretNum} />
+						<PlayerCard key={player.id} player={player} onGuess={onGuess} players={players} setPlayers={setPlayers} usedNumbers={usedNumbers} setUsedNumbers={setUsedNumbers} secretNum={secretNum} isGameOver={isGameOver} />
 					))}
 				</div>
 			</div>

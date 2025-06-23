@@ -1,7 +1,7 @@
 import styles from "./NumberGuessManager.module.css"
 import { useState } from "react"
 
-function PlayerCard({ player, onGuess, setPlayers, usedNumbers, setUsedNumbers, secretNum }) {
+function PlayerCard({ player, players, onGuess, setPlayers, usedNumbers, setUsedNumbers, secretNum, isGameOver }) {
 	const { title, id, isActive, isLoser, guessedNums } = player
 
 	const [userNumber, setUserNumber] = useState('')
@@ -26,15 +26,15 @@ function PlayerCard({ player, onGuess, setPlayers, usedNumbers, setUsedNumbers, 
 		setUsedNumbers(prev => [...prev, num])
 		// Якщо гравець вгадав цифру
 		if (secretNum.includes(userNumber)) {
-			// Оновлюю інформацію по гравцю
-			setPlayers(prev =>
-				prev.map(player =>
-					player.isActive
-						? { ...player, guessedNums: [...player.guessedNums, num], isGuess: true }
-						: player
-				)
+			// Оновлюю інформацію по гравцям, винесла окремо в масив, щоб інформаці по гравцю встигла оновитись для функції onGuess (інакше вона не спрацьовувала)
+			const updatedPlayers = players.map(player =>
+				player.isActive
+					? { ...player, guessedNums: [...player.guessedNums, num], isGuess: true }
+					: player
 			)
-			onGuess(id)
+			setPlayers(updatedPlayers)
+			onGuess(id, updatedPlayers)
+
 			// Перемикаю активного гравця
 			setPlayers(prev => {
 				const activePlayerIndex = prev.findIndex(player => player.isActive)
@@ -46,8 +46,9 @@ function PlayerCard({ player, onGuess, setPlayers, usedNumbers, setUsedNumbers, 
 				}))
 			})
 
+			
 		} else {
-			// Якщо не вгадав, то все-одно перемикаюактивного гравця
+			// Якщо не вгадав, то все-одно перемикаю активного гравця
 			setPlayers(prev => {
 				const activePlayerIndex = prev.findIndex(player => player.isActive)
 				const nextActivePlayerIndex = (activePlayerIndex + 1) % prev.length
@@ -72,7 +73,7 @@ function PlayerCard({ player, onGuess, setPlayers, usedNumbers, setUsedNumbers, 
 					<input type="number" value={userNumber} onChange={handleChange} />
 				</label>
 				{/* Кнопка */}
-				<button disabled={!isActive || usedNumbers.includes(parseInt(userNumber))} type="button" onClick={handleClick}>Зробити хід</button>
+				<button disabled={!isActive || usedNumbers.includes(parseInt(userNumber)) || isGameOver} type="button" onClick={handleClick}>Зробити хід</button>
 				{/* Блок, де виводяться вгадані цифри */}
 				<div className={styles.guessedList}>
 					<h4>Вгадані числа:</h4>
