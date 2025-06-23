@@ -1,7 +1,7 @@
 import styles from "./NumberGuessManager.module.css"
 import { useState } from "react"
 
-function PlayerCard({ player, players, onGuess, setPlayers, usedNumbers, setUsedNumbers, secretNum, isGameOver }) {
+function PlayerCard({ player, handleClick, isGameOver }) {
 	const { title, id, isActive, isLoser, guessedNums } = player
 
 	const [userNumber, setUserNumber] = useState('')
@@ -15,53 +15,6 @@ function PlayerCard({ player, players, onGuess, setPlayers, usedNumbers, setUsed
 		setUserNumber(value)
 	}
 
-	const handleClick = () => {
-		// Якщо введено пустий рядок, то забороняю це відправляти
-		if (userNumber === '') return
-		// Пеерводжу введене чсило в рядок
-		const num = parseInt(userNumber)
-		// Якщо ця цифра вже є в масиві вже введних до цього, то виходимо і юзер може ввести нову цифру
-		if (usedNumbers.includes(num)) return
-		// Оновлюю масив вже введних цифр
-		setUsedNumbers(prev => [...prev, num])
-		// Якщо гравець вгадав цифру
-		if (secretNum.includes(userNumber)) {
-			// Оновлюю інформацію по гравцям, винесла окремо в масив, щоб інформаці по гравцю встигла оновитись для функції onGuess (інакше вона не спрацьовувала)
-			const updatedPlayers = players.map(player =>
-				player.isActive
-					? { ...player, guessedNums: [...player.guessedNums, num], isGuess: true }
-					: player
-			)
-			setPlayers(updatedPlayers)
-			onGuess(id, updatedPlayers)
-
-			// Перемикаю активного гравця
-			setPlayers(prev => {
-				const activePlayerIndex = prev.findIndex(player => player.isActive)
-				const nextActivePlayerIndex = (activePlayerIndex + 1) % prev.length
-
-				return prev.map((player, index) => ({
-					...player,
-					isActive: index === nextActivePlayerIndex
-				}))
-			})
-
-			
-		} else {
-			// Якщо не вгадав, то все-одно перемикаю активного гравця
-			setPlayers(prev => {
-				const activePlayerIndex = prev.findIndex(player => player.isActive)
-				const nextActivePlayerIndex = (activePlayerIndex + 1) % prev.length
-				return prev.map((player, index) => ({
-					...player,
-					isActive: index === nextActivePlayerIndex
-				}))
-			})
-		}
-		// Очищую інпут
-		setUserNumber('')
-	}
-
 	return (
 		<>
 			<div className={styles.card}>
@@ -73,7 +26,10 @@ function PlayerCard({ player, players, onGuess, setPlayers, usedNumbers, setUsed
 					<input type="number" value={userNumber} onChange={handleChange} />
 				</label>
 				{/* Кнопка */}
-				<button disabled={!isActive || usedNumbers.includes(parseInt(userNumber)) || isGameOver} type="button" onClick={handleClick}>Зробити хід</button>
+				<button disabled={!isActive || isGameOver} type="button" onClick={() => {
+					handleClick(userNumber, id)
+					setUserNumber('')
+				}}>Зробити хід</button>
 				{/* Блок, де виводяться вгадані цифри */}
 				<div className={styles.guessedList}>
 					<h4>Вгадані числа:</h4>

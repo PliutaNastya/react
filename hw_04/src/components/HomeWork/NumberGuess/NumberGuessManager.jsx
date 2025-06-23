@@ -50,9 +50,10 @@ function NumberGuessManager() {
 		setSecretNum(String(randomNum))
 	}, [])
 
-	const onGuess = (playerId, updatePlayers) => {
+	// Функція для визначення чи завершилась гра
+	const checkGameOver = (updatedPlayers, playerId) => {
 		// знаходжу всі вгадані цифри обох гравців
-		const allGuessedNums = updatePlayers.map(player => player.guessedNums).flat()
+		const allGuessedNums = updatedPlayers.map(player => player.guessedNums).flat()
 		// якщо всі вони відповідають загаданому числу
 		const isAllGuessed = secretNum.split("").every(num => allGuessedNums.includes(parseInt(num)))
 		// то визначаю програвшого
@@ -61,12 +62,50 @@ function NumberGuessManager() {
 				...player,
 				isLoser: player.id === playerId
 			})))
-		} 
+		}
+	}
+
+	const handleClick = (userNumber, playerId) => {
+		// Якщо введено пустий рядок, то забороняю це відправляти
+		if (userNumber === '') return
+		// Пеерводжу введене чсило в рядок
+		const num = parseInt(userNumber)
+		// Якщо ця цифра вже є в масиві вже введних до цього, то виходимо і юзер може ввести нову цифру
+		if (usedNumbers.includes(num)) return
+		// Оновлюю масив вже введних цифр
+		setUsedNumbers(prev => [...prev, num])
+
+		// Функція для перемикання активного гравця
+		const switchPlayer = () => {
+
+			setPlayers(prev => {
+				const activePlayerIndex = prev.findIndex(player => player.isActive)
+				const nextActivePlayerIndex = (activePlayerIndex + 1) % prev.length
+
+				return prev.map((player, index) => ({
+					...player,
+					isActive: index === nextActivePlayerIndex
+				}))
+			})
+		}
+
+		// Якщо гравець вгадав цифру
+		if (secretNum.includes(userNumber)) {
+			// Оновлюю інформацію по гравцям, винесла окремо в масив, щоб інформаці по гравцю встигла оновитись для функції onGuess (інакше вона не спрацьовувала)
+			const updatedPlayers = players.map(player =>
+				player.isActive
+					? { ...player, guessedNums: [...player.guessedNums, num], isGuess: true }
+					: player
+			)
+			setPlayers(updatedPlayers)
+			checkGameOver(updatedPlayers, playerId)
+			switchPlayer()
+		} else {
+			switchPlayer()
+		}
 	}
 
 	const isGameOver = players.some(player => player.isLoser)
-
-	console.log(players)
 
 	return (
 		<>
@@ -76,7 +115,7 @@ function NumberGuessManager() {
 				{/* Виводжу картки гравців */}
 				<div className={styles.cards}>
 					{players.map(player => (
-						<PlayerCard key={player.id} player={player} onGuess={onGuess} players={players} setPlayers={setPlayers} usedNumbers={usedNumbers} setUsedNumbers={setUsedNumbers} secretNum={secretNum} isGameOver={isGameOver} />
+						<PlayerCard key={player.id} player={player} handleClick={handleClick} isGameOver={isGameOver} />
 					))}
 				</div>
 			</div>
