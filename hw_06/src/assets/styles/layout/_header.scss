@@ -1,0 +1,20 @@
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+.header {
+	padding-block: 1.875rem;
+}
+.menu {
+	padding: 0.625rem 1.25rem;
+	box-shadow: $boxShadowForCnt;
+	border-radius: 0.8125rem;
+	@include center;
+}
+.menu-list {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	align-items: center;
+	column-gap: 1.875rem;
+	row-gap: 0.625rem;
+}

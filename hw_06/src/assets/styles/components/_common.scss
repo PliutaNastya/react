@@ -1,0 +1,144 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,regular,700&display=swap");
+
+body {
+	font-family: "Montserrat", sans-serif;
+	line-height: 1.3;
+	color: $primaryTextColor;
+	background-color: $primaryBgColor;
+}
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0rem 0.9375rem 3.125rem;
+}
+h2 {
+	&:not(:last-child) {
+		margin-block-end: 15px;
+	}
+}
+button {
+	width: 100%;
+	@include btnStyles;
+	@include center;
+
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			@include btnHover;
+		}
+	}
+
+	&:focus {
+		@include focus;
+	}
+	&:disabled {
+		opacity: 0.5;
+		pointer-events: none;
+		cursor: not-allowed;
+	}
+}
+input,
+select {
+	padding: 15px;
+	border: 1px solid $borderColor;
+	border-radius: 13px;
+	font: inherit;
+	background-color: $primaryBgColor;
+	color: #fff;
+	width: 100%;
+
+	&:focus-visible {
+		@include focus;
+	}
+}
+label {
+	display: inline-block;
+	margin-block-end: 15px;
+	span {
+		display: inline-block;
+		margin-block-end: 15px;
+	}
+}
+.filter-btns {
+	display: flex;
+	gap: 20px;
+	@media (max-width: 47.9988rem) {
+		flex-direction: column;
+	}
+}
+td {
+	width: 40px;
+	height: 40px;
+	// background-color: #7700795b;
+	cursor: pointer;
+}
+.task-cnt {
+	ul {
+		margin-left: 30px;
+		li {
+			list-style-type: lower-latin;
+		}
+	}
+}
+*::placeholder {
+	color: $accentTextColor;
+	opacity: 0.7;
+}
+.result {
+	display: grid;
+	row-gap: 15px;
+}
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 30px;
+}
+.card {
+	background-color: $borderColor;
+	padding: 15px;
+	transition: box-shadow 0.3s ease;
+	border: 1px solid $accentTextColor;
+	a {
+		width: 100%;
+		display: grid;
+		row-gap: 15px;
+	}
+	h3 {
+		color: $accentTextColor;
+	}
+	img {
+		width: 100%;
+		aspect-ratio: 1;
+		object-fit: contain;
+	}
+
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			box-shadow: 0px 0px 10px $borderColor;
+		}
+	}
+}
+.img-cnt {
+	max-width: 500px;
+	width: 100%;
+	aspect-ratio: 1;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+}
+.todo-list {
+	display: grid;
+	row-gap: 15px;
+}
+.todo-item {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 15px;
+	box-shadow: $boxShadowForCnt;
+}

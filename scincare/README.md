@@ -6,7 +6,7 @@ This is a React project of an online store. I want to build this to learn React.
 
 ## [Template](https://www.figma.com/design/p9Jq25VeRlhc3U1gryQVYz/Skincare-E-commerce-Website--Community-?m=auto&t=lUvIBfkmD40NX3FV-6)
 
-## 🔧 Main Features
+## 🔧 Main Pages
 
 - Landing page with hero section
 - Menu (navigation bar)
@@ -70,7 +70,7 @@ src/
 │   ├── FAQPage.jsx
 │   └── ...
 ├── context/
-│   └── CartContext.jsx
+├── utils/
 ├── data/
 │   └── products.json (https://dummyjson.com)
 ├── App.jsx
