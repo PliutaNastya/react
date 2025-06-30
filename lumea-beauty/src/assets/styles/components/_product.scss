@@ -1,0 +1,83 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+.product {
+	padding-block: 150px;
+
+	&__container {}
+
+	&__back-link {
+		font-weight: 700;
+		transition: color 0.3s ease;
+
+		&:not(:last-child) {
+			margin-block-end: 15px;
+		}
+
+		@media (any-hover: hover), (pointer: fine) {
+			&:hover {
+				color: $accentTextColor;
+			}
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2.5rem;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	&__image {
+		flex: 1 1 25rem;
+		img {
+			filter: drop-shadow(1px 1px 15px $accentTextColor);
+			@include img-contain;
+		}
+	}
+
+	&__info {
+		align-self: center;
+		flex: 1 1 25rem;
+		display: grid;
+		gap: 0.9375rem;
+	}
+
+	&__title {
+		font-size: 2rem;
+		font-weight: 700;
+		color: $accentTextColor;
+	}
+
+	&__description {
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	&__price-box {
+		display: flex;
+		align-items: center;
+		gap: 0.9375rem;
+
+		.product__price {
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: $accentTextColor;
+		}
+
+		.product__discount {
+			color: #ac2c2c;
+			background-color: #e1b1b1;
+			padding: 0.3125rem 0.625rem;
+			border-radius: 0.3125rem;
+		}
+	}
+
+	&__rating {
+		color: #93610f;
+	}
+
+	&__btn {
+	}
+}

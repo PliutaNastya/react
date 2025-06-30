@@ -1,0 +1,34 @@
+@use '../base/variables' as *;
+@mixin center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin btnHover {
+	opacity: 0.75;
+	box-shadow: $boxShadowInsetBtnHover;
+	transition: box-shadow 0.5s ease, color 0.3s ease, opacity 0.3s ease;
+}
+@mixin focus {
+	outline: 1px solid $accentTextColor;
+	outline-offset: 2px;
+	opacity: 0.75;
+	box-shadow: $boxShadowInsetBtnHover;
+	transition: box-shadow 0.5s ease, color 0.3s ease, opacity 0.3s ease;
+}
+@mixin btnStyles {
+	padding: 0.875rem 1.75rem;
+	border-radius: 0.8125rem;
+	box-shadow: $boxShadowBtn;
+	transition: box-shadow 0.5s ease, color 0.3s ease;
+}
+@mixin img-contain {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+@mixin img-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

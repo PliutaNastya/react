@@ -1,0 +1,60 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,regular,700&display=swap");
+
+body {
+	font-family: "Montserrat", sans-serif;
+	line-height: 1.3;
+	color: $primaryTextColor;
+	background-color: $primaryBgColor;
+}
+#root {
+	overflow: clip;
+	min-height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	& > main {
+		flex-grow: 1;
+	}
+}
+[class*="__container"] {
+	max-width: 84.375rem;
+	margin: 0 auto;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.title {
+	font-size: 32px;
+	font-weight: 700;
+}
+.text {
+	p {
+		line-height: 1.5;
+		&:not(:last-child) {
+			margin-block-end: 0.9375rem;
+		}
+	}
+}
+.spinner {
+	min-height: 100svh;
+	background-color: $primaryBgColor;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+}
+.button {
+	@include btnStyles;
+
+	@media (any-hover: hover), (pointer: fine) {
+		&:hover {
+			@include btnHover;
+		}
+	}
+	
+	&:focus {
+		@include focus;
+	}
+}
