@@ -1,0 +1,62 @@
+[
+	{
+		"id": "1",
+		"name": "Олена Коваль",
+		"subject": "Математика",
+		"photo": "https://cdn-icons-png.flaticon.com/512/168/168723.png"
+	},
+	{
+		"id": "2",
+		"name": "Іван Петренко",
+		"subject": "Фізика",
+		"photo": "https://cdn-icons-png.flaticon.com/512/168/168724.png"
+	},
+	{
+		"id": "3",
+		"name": "Наталія Сидорова",
+		"subject": "Історія",
+		"photo": "https://cdn-icons-png.flaticon.com/512/168/168725.png"
+	},
+	{
+		"id": "4",
+		"name": "Марія Іваненко",
+		"subject": "Українська мова",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+	},
+	{
+		"id": "5",
+		"name": "Андрій Шевчук",
+		"subject": "Англійська мова",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140051.png"
+	},
+	{
+		"id": "6",
+		"name": "Світлана Романюк",
+		"subject": "Біологія",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140060.png"
+	},
+	{
+		"id": "7",
+		"name": "Дмитро Козак",
+		"subject": "Географія",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140037.png"
+	},
+	{
+		"id": "8",
+		"name": "Анастасія Плюта",
+		"subject": "Хімія",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140045.png"
+	},
+	{
+		"id": "9",
+		"name": "Юрій Бондаренко",
+		"subject": "Інформатика",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140039.png"
+	},
+	{
+		"id": "10",
+		"name": "Людмила Павленко",
+		"subject": "Мистецтво",
+		"photo": "https://cdn-icons-png.flaticon.com/512/4140/4140047.png"
+	}
+]
