@@ -1,0 +1,27 @@
+:root[data-theme="light"] {
+	--main-text-color: #fff;
+
+	--opacity-bg: rgba(161, 161, 161, 0.8);
+
+	--toggle-bg: #a3eaff7e;
+	--toggle-circle: #fffac0;
+
+	--button-bg: #0091b9;
+	--button-bg-hover: #006e8d;
+
+	--menu-bg: #0091b9;
+}
+
+:root[data-theme='dark'] {
+	--main-text-color: #aeaeae;
+
+	--opacity-bg: rgba(30, 30, 30, 0.8);
+
+	--toggle-bg: #2d4c567e;
+	--toggle-circle: #00ccd7;
+
+	--button-bg: #013f51;
+	--button-bg-hover: #002934;
+
+	--menu-bg: #013f51;
+}

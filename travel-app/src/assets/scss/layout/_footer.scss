@@ -1,0 +1,11 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.footer {
+	padding-block: rem(30);
+	&__container {
+		text-align: center;
+	}
+}
