@@ -1,0 +1,24 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.home {
+	min-height: calc(100svh - 220px);
+	display: grid;
+	place-content: center;
+}
+.home__container {
+	padding: rem(35);
+	@include btnStyles;
+
+	text-align: center;
+	h1 {
+		font-weight: 700;
+		font-size: rem(34);
+
+		&:not(:last-child) {
+			margin-block-end: rem(15);
+		}
+	}
+}

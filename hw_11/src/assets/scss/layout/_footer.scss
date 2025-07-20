@@ -1,0 +1,10 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.footer {
+	padding-block: rem(25);
+	text-align: center;
+	box-shadow: $boxShadowBtn;
+}

@@ -1,0 +1,98 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+// ============================================
+.spinner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2.5rem;
+}
+// ============================================
+.products,
+.posts {
+	padding-block: rem(50);
+
+	h1 {
+		text-align: center;
+		font-size: rem(32);
+		&:not(:last-child) {
+			margin-block-end: rem(35);
+		}
+	}
+}
+.products__body {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: rem(15);
+
+	&:not(:last-child) {
+		margin-block-end: rem(35);
+	}
+
+	& > * {
+		flex: 1 0 250px;
+	}
+	label {
+		display: inline-block;
+		width: 100%;
+		@include btnStyles;
+		&:not(:last-child) {
+			margin-block-end: rem(15);
+		}
+	}
+
+	input {
+		@include btnHover;
+		padding: rem(15);
+		&:not(:last-child) {
+			margin-block-end: rem(15);
+		}
+
+		&:focus-visible {
+			@include focus;
+		}
+	}
+	button {
+		@include btnStyles;
+		width: 100%;
+
+		&:hover {
+			@include btnHover;
+		}
+	}
+}
+// ============================================
+.list {
+	display: grid;
+	row-gap: rem(15);
+	li {
+		@include btnStyles;
+	}
+}
+// ============================================
+/* Chrome, Edge, Safari */
+.scrollable {
+	overflow: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-accent) var(--color-light-gray);
+}
+/* Webkit (Chrome, Safari) */
+.scrollable::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+.scrollable::-webkit-scrollbar-thumb {
+	background-color: var(--color-accent);
+	border-radius: 4px;
+	border: none;
+}
+.scrollable::-webkit-scrollbar-track {
+	background: var(--color-light-gray);
+}
+.scrollable::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-accent);
+}
