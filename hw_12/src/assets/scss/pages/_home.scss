@@ -1,0 +1,154 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.post-cards {
+	display: grid;
+	row-gap: rem(25);
+
+	&:not(:last-child) {
+		margin-block-end: rem(30);
+	}
+}
+.post-card {
+	padding: rem(15);
+	box-shadow: $boxShadowBtn;
+
+	& > *:not(:last-child) {
+		margin-block-end: em(15);
+	}
+}
+.post-card__title {
+	font-weight: 700;
+}
+.post-card__text {
+}
+.post-card__info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: rem(15);
+
+	color: $accentTextColor;
+}
+.button {
+	@include btnStyles;
+
+	&:hover {
+		@include btnHover;
+	}
+}
+.button--show-more {
+	width: 100%;
+	&:not(:last-child) {
+		margin-block-end: rem(30);
+	}
+}
+form {
+	display: grid;
+	row-gap: rem(25);
+	padding: rem(15);
+	box-shadow: $boxShadowBtn;
+
+	&:not(:last-child) {
+		margin-block-end: rem(30);
+	}
+
+	input,
+	textarea,
+	select {
+		padding: rem(15);
+		box-shadow: $boxShadowInsetBtnHover;
+
+		&:focus {
+			@include focus;
+		}
+	}
+
+	textarea {
+		min-height: rem(50);
+		resize: vertical;
+	}
+	label {
+		span {
+			display: inline-block;
+			&:not(:last-child) {
+				margin-block-end: rem(10);
+			}
+		}
+	}
+
+	select {
+		font: inherit;
+		width: 100%;
+		background-color: $primaryBgColor;
+	}
+}
+.table-cnt {
+	overflow: auto;
+	overflow-y: hidden;
+}
+table {
+	min-width: rem(500);
+	padding: rem(10);
+	width: 100%;
+	border: rem(1) solid $accentTextColor;
+
+	td,
+	th {
+		padding: rem(5);
+		border: rem(1) solid $accentTextColor;
+	}
+	td:has(button) {
+		display: flex;
+		align-items: center;
+		column-gap: rem(15);
+		button {
+			width: calc(50% - 7.5px);
+		}
+	}
+}
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: rem(15);
+
+	button {
+		padding: rem(10);
+		background-color: $accentTextColor;
+		color: #fff;
+		border: 3px solid $accentTextColor;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease;
+
+		&:hover:not(:disabled) {
+			background-color: #fff;
+			color: $accentTextColor;
+		}
+
+		&.active {
+			background-color: #fff;
+			color: $accentTextColor;
+		}
+		&:disabled {
+			opacity: 0.3;
+			cursor: not-allowed;
+		}
+	}
+}
+.loading,
+.error {
+	color: #007219;
+	text-align: center;
+	&:not(:last-child) {
+		margin-block-end: rem(30);
+	}
+}
+.error {
+	color: #560000;
+}

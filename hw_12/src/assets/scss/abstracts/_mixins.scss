@@ -1,0 +1,44 @@
+@use "../abstracts/variables" as *;
+// Міксин для адаптивного шрифту
+// min - мінімальний розмір шрифту
+// max - максимальний розмір шрифту
+// vwMin, vwMax - діапазон ширини вікна
+@mixin fluid-font($min, $max, $vwMin: 320, $vwMax: 1920) {
+	font-size: calc(#{$min}px + (#{$max} - #{$min}) * ((100vw - #{$vwMin}px) / (#{$vwMax} - #{$vwMin})));
+}
+@mixin clamp($property, $min, $preferred, $max) {
+	#{$property}: clamp(#{$min}, #{$preferred}, #{$max});
+}
+// Aspect Ratio
+@mixin aspect-ratio($width, $height) {
+	aspect-ratio: #{$width} / #{$height};
+}
+//  Full-size overlay
+@mixin overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+@mixin btnHover {
+	color: $accentTextColor;
+	opacity: 0.75;
+	box-shadow: $boxShadowInsetBtnHover;
+	transition: box-shadow 0.5s ease, color 0.3s ease, opacity 0.3s ease;
+}
+@mixin focus {
+	outline: 1px solid $accentTextColor;
+	outline-offset: 2px;
+	opacity: 0.75;
+	box-shadow: $boxShadowInsetBtnHover;
+	transition: box-shadow 0.5s ease, color 0.3s ease, opacity 0.3s ease;
+}
+@mixin btnStyles {
+	padding: 0.875rem 1.75rem;
+	border-radius: 0.8125rem;
+	box-shadow: $boxShadowBtn;
+	transition: box-shadow 0.5s ease, color 0.3s ease;
+}

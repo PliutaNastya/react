@@ -1,0 +1,29 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.header {
+	padding-block: rem(15);
+}
+.header__container {
+	text-align: center;
+}
+.menu {
+}
+.menu__list {	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: rem(15);
+}
+.menu__item {
+}
+.menu__link {
+	@include btnStyles;
+
+	&:hover, &--active {
+		@include btnHover;
+	}
+}

@@ -1,0 +1,22 @@
+export const categoriesList = [
+	"Groceries",
+	"Rent",
+	"Utilities",
+	"Transportation",
+	"Dining Out",
+	"Healthcare",
+	"Clothing",
+	"Entertainment",
+	"Subscriptions",
+	"Education",
+	"Childcare",
+	"Travel",
+	"Gifts",
+	"Home Maintenance",
+	"Insurance",
+	"Pets",
+	"Phone & Internet",
+	"Personal Care",
+	"Savings & Investments",
+	"Miscellaneous"
+]

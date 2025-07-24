@@ -1,0 +1,20 @@
+$accentTextColor: #8b6d4f;
+$primaryTextColor: #3e3527;
+$primaryBgColor: #f5e8dc;
+$borderColor: #e0d4c3;
+
+$boxShadowForCnt:
+	8px 8px 16px rgba(201, 183, 162, 0.5),
+	-8px -8px 16px rgba(255, 255, 255, 0.6);
+
+$boxShadowBtn:
+	6px 6px 12px rgba(190, 170, 150, 0.4),
+	-6px -6px 12px rgba(255, 255, 255, 0.7),
+	inset 0 0 0 rgba(0, 0, 0, 0),
+	inset 0 0 0 rgba(255, 255, 255, 0);
+
+$boxShadowInsetBtnHover:
+	0 0 0 rgba(0, 0, 0, 0),
+	0 0 0 rgba(255, 255, 255, 0),
+	inset 6px 6px 12px rgba(200, 180, 160, 0.4),
+	inset -6px -6px 12px rgba(255, 255, 255, 0.6);
