@@ -1,0 +1,68 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.menu {
+}
+.menu-list {
+	display: grid;
+	margin-inline-start: rem(15);
+
+	@media (max-width: em(767.98)) {
+		margin-inline-start: rem(5);
+	}
+}
+.menu-item {
+}
+.menu-link {
+	position: relative;
+	padding-block: 1.5vw;
+	display: flex;
+	align-items: center;
+	column-gap: rem(15);
+	border-radius: rem(20) 0 0 rem(20);
+
+	@include clamp('padding-inline', 15px, 3vw, 30px);
+
+	svg {
+		flex-shrink: 0;
+	}
+
+	@media (max-width: em(767.98)) {
+		padding: rem(25) rem(15);
+		border-radius: rem(10) 0 0 rem(10);
+		span {
+			display: none;
+		}
+	}
+
+	&.active {
+		background-color: var(--main-bg-color);
+
+		&::before,
+		&::after {
+			--border-radius: 2rem;
+
+			content: "";
+			position: absolute;
+			width: var(--border-radius);
+			height: var(--border-radius);
+			right: 0;
+			border-radius: 50%;
+			pointer-events: none;
+		}
+
+		&::before {
+			top: calc(var(--border-radius) * -1);
+			box-shadow: 10px 10px 0 10px var(--main-bg-color);
+			border-radius: 0 0 50% 0;
+		}
+
+		&::after {
+			bottom: calc(var(--border-radius) * -1);
+			box-shadow: 10px -10px 0 10px var(--main-bg-color);
+			border-radius: 0 50% 0 0;
+		}
+	}
+}

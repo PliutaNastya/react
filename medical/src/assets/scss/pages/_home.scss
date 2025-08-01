@@ -1,0 +1,51 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/extends" as *;
+
+.home {
+	padding-block: rem(50);
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	gap: rem(30);
+	grid-template-areas:
+		"total total"
+		"table actions";
+
+	@media (max-width: em(767.98)) {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+		"actions"
+		"table"
+		"total";
+	}
+
+	.total-list {
+		grid-area: total;
+	}
+	.actions {
+		grid-area: actions;
+		align-self: start;
+	}
+	.appointments-table {
+		grid-area: table;
+	}
+}
+// ============================================
+.appointments-table {
+	width: 100%;
+	background-color: var(--secondary-bg-color);
+	padding: max(rem(15), 1.5vw);
+
+	overflow-x: auto;
+
+	table {
+		width: 100%;
+		text-align: left;
+	}
+
+	td, th {
+		padding: max(rem(8), 0.5vw);
+		border: rem(1) solid var(--border-color);
+	}
+}
