@@ -8,10 +8,11 @@ import { useNavigate, useParams } from "react-router"
 function DoctorsForm() {
 	const [formData, setFormData] = useState(() => emptyDoctorData)
 	const { id } = useParams()
+	const navigate = useNavigate()
+
 	const { data: doctorData, isLoading } = useGetDoctorByIdQuery(id, { skip: !id })
 	const [updateDoctor, { isLoading: isEditing }] = useUpdateDoctorMutation()
 	const [addNewDoctor, { isLoading: isCreating }] = useAddNewDoctorMutation()
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (doctorData) setFormData(doctorData)

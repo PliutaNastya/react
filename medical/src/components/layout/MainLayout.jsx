@@ -5,8 +5,11 @@ import AppointmentsDataProvider from "@/providers/AppointmentsDataProvider"
 import { useGetDoctorsQuery, useGetPatientsQuery } from "@/api";
 
 function MainLayout() {
-	useGetPatientsQuery({ page: 1, limit: 1000 });
-	useGetDoctorsQuery({ page: 1, limit: 1000 });
+	// Дані зникали через хвилину, через очищення кешу при невикористані даних
+	// тому тут викликаю хуки, на самому верхньому рівні
+	useGetPatientsQuery({ page: 1, limit: 1000 })
+	useGetDoctorsQuery({ page: 1, limit: 1000 })
+
 	return (
 		<>
 			<aside>

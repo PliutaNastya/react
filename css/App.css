@@ -436,6 +436,14 @@ textarea {
   transition: box-shadow 0.5s ease, color 0.3s ease, opacity 0.3s ease, -webkit-box-shadow 0.5s ease;
 }
 
+.button--show-more {
+  width: 100%;
+}
+.button--show-more:not(:last-child) {
+  -webkit-margin-after: 1.875rem;
+          margin-block-end: 1.875rem;
+}
+
 form {
   display: grid;
   row-gap: 1.5625rem;
@@ -495,7 +503,8 @@ table {
   width: 100%;
   border: 0.0625rem solid #8b6d4f;
 }
-table td, table th {
+table td,
+table th {
   padding: 0.3125rem;
   border: 0.0625rem solid #8b6d4f;
 }
@@ -532,38 +541,37 @@ table td:has(button) button {
   padding: 0.625rem;
   background-color: #8b6d4f;
   color: #fff;
+  border: 3px solid #8b6d4f;
   -webkit-transition: background-color 0.3s ease, color 0.3s ease;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-.pagination button:hover {
+.pagination button:hover:not(:disabled) {
   background-color: #fff;
   color: #8b6d4f;
 }
-.pagination button .active {
-  outline: 1px solid #fff;
-}5px;
-          margin-block-end: 15px;
+.pagination button.active {
+  background-color: #fff;
+  color: #8b6d4f;
 }
-.dishes-cnt li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 15px;
-  padding-block: 15px;
+.pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
-.dishes-cnt li:not(:last-child) {
-  border-bottom: 1px solid #d0ffdb;
+
+.loading,
+.error {
+  color: #007219;
+  text-align: center;
 }
-.dishes-cnt li h4 {
-  color: #d0ffdb;
+.loading:not(:last-child),
+.error:not(:last-child) {
+  -webkit-margin-after: 1.875rem;
+          margin-block-end: 1.875rem;
+}
+
+.error {
+  color: #560000;
+}0ffdb;
 }
 
 #root {

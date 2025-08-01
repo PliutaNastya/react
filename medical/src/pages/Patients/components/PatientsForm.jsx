@@ -9,10 +9,12 @@ function PatientsForm() {
 
 	const [formData, setFormData] = useState(() => emptyData)
 	const { id } = useParams()
+	const navigate = useNavigate()
+	
 	const { data: patientData, isLoading } = useGetPatientByIdQuery(id, { skip: !id })
 	const [updatePatient, { isLoading: isEditing }] = useUpdatePatientMutation()
 	const [addNewPatient, { isLoading: isCreating }] = useAddNewPatientMutation()
-	const navigate = useNavigate()
+	
 
 	useEffect(() => {
 		if (patientData) setFormData(patientData)

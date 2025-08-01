@@ -1,4 +1,5 @@
 const apiRoutes = {
+	// Пацієнти
 	patients: {
 		base: '/patients',
 		getAll: '/patients',
@@ -10,6 +11,7 @@ const apiRoutes = {
 		getPaginated: (page = 1, limit = 5) => `/patients?page=${page}&limit=${limit}`
 	},
 
+	// Прийоми
 	appointments: {
 		base: '/appointments',
 		getAll: '/appointments',
@@ -23,6 +25,7 @@ const apiRoutes = {
 
 	},
 
+	// Лікарі
 	doctors: {
 		base: '/admin/doctors',
 		getAll: '/admin/doctors',

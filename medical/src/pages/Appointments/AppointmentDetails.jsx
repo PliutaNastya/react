@@ -6,9 +6,12 @@ import Spinner from "@/components/Spinner"
 import { useAppointmentsDataContext } from "@/context/AppointmentsDataContext"
 
 function AppointmentDetails() {
+	// Виклик даних про пацієнтів та лікарів з контексту
 	const { patientEntities, doctorEntities } = useAppointmentsDataContext()
 
+	// Отримання id запису
 	const { id } = useParams()
+	// Отримання даних про конкретний запис
 	const { data: appointment, isLoading } = useGetAppointmentByIdQuery(id)
 
 	return (

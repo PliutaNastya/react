@@ -5,8 +5,10 @@ import { statusLabels } from "../../../utils"
 import { useAppointmentsDataContext } from "@/context/AppointmentsDataContext"
 
 function AppointmentsItem({ item }) {
+	// Виклик даних про пацієнтів та лікарів з контексту
 	const { patientEntities, doctorEntities } = useAppointmentsDataContext()
 
+	// Отримання функції для видалення запису
 	const [deleteAppointment, { isLoading }] = useDeleteAppointmentMutation()
 	const onDelete = () => {
 		deleteAppointment(item.id)

@@ -9,6 +9,7 @@ export const api = createApi({
 	tagTypes: ['Patients', 'Doctors', 'Appointments'],
 	endpoints: (builder) => ({
 		// Пацієнти
+		// Отримання пацієнтів
 		getPatients: builder.query({
 			query: ({ page = 1, limit = 5 } = {}) => apiRoutes.patients.getPaginated(page, limit),
 			// перетворює масив на нормалізований state
@@ -22,14 +23,17 @@ export const api = createApi({
 			}),
 			providesTags: ['Patients']
 		}),
+		// Отримання пацієнта по id
 		getPatientById: builder.query({
 			query: (id) => apiRoutes.patients.getById(id),
 			providesTags: (result, error, id) => [{ type: 'Patients', id }]
 		}),
+		// Отримання відфільтрованих по імені пацієнтів
 		getFilteredByPatientName: builder.query({
 			query: (name) => apiRoutes.patients.filterByName(name),
 			providesTags: ['Patients']
 		}),
+		// Оновлення пацієнта після редагування
 		updatePatient: builder.mutation({
 			query: ({ id, ...data }) => ({
 				url: apiRoutes.patients.update(id),
@@ -38,6 +42,7 @@ export const api = createApi({
 			}),
 			invalidatesTags: (result, error, id) => ['Patients', { type: 'Patients', id }]
 		}),
+		// Додавання нового пацієнта
 		addNewPatient: builder.mutation({
 			query: (data) => ({
 				url: apiRoutes.patients.create,
@@ -46,6 +51,7 @@ export const api = createApi({
 			}),
 			invalidatesTags: ['Patients']
 		}),
+		// Видалення пацієнта по id
 		deletePatients: builder.mutation({
 			query: (id) => ({
 				url: apiRoutes.patients.delete(id),
@@ -54,6 +60,7 @@ export const api = createApi({
 			invalidatesTags: (result, error, id) => ['Patients', { type: 'Patients', id }]
 		}),
 		// Лікарі
+		// Отримання лікарів
 		getDoctors: builder.query({
 			query: ({ page = 1, limit = 5 } = {}) => apiRoutes.doctors.getPaginated(page, limit),
 			transformResponse: (response) => ({
@@ -66,6 +73,7 @@ export const api = createApi({
 			}),
 			providesTags: ['Doctors']
 		}),
+		// Видалення лікарів
 		deleteDoctors: builder.mutation({
 			query: (id) => ({
 				url: apiRoutes.doctors.delete(id),
@@ -73,10 +81,12 @@ export const api = createApi({
 			}),
 			invalidatesTags: (result, error, id) => ['Doctors', { type: 'Doctors', id }]
 		}),
+		// Отримання лікаря по id
 		getDoctorById: builder.query({
 			query: (id) => apiRoutes.doctors.getById(id),
 			providesTags: (result, error, id) => [{ type: 'Doctors', id }]
 		}),
+		// Оновлення лікаря після редагування
 		updateDoctor: builder.mutation({
 			query: ({ id, ...data }) => ({
 				url: apiRoutes.doctors.update(id),
@@ -85,6 +95,7 @@ export const api = createApi({
 			}),
 			invalidatesTags: (result, error, id) => ['Doctors', { type: 'Doctors', id }]
 		}),
+		// Додавання нового лікаря
 		addNewDoctor: builder.mutation({
 			query: (data) => ({
 				url: apiRoutes.doctors.create,
@@ -94,6 +105,7 @@ export const api = createApi({
 			invalidatesTags: ['Doctors']
 		}),
 		// Записи
+		// Отримання записів
 		getAllAppointments: builder.query({
 			query: ({ page = 1, limit = 5 } = {}) =>
 				apiRoutes.appointments.getPaginated(page, limit),
@@ -108,14 +120,17 @@ export const api = createApi({
 			}),
 			providesTags: ['Appointments']
 		}),
+		// Фільтрування записів по імені пацієнта
 		getFilteredAppointmentsByPatientName: builder.query({
 			query: (name) => apiRoutes.appointments.filterByPatientName(name),
 			providesTags: ['Appointments']
 		}),
+		// Фільтрування записів по даті
 		getFilteredAppointmentsByDate: builder.query({
 			query: (date) => apiRoutes.appointments.filterByDate(date),
 			providesTags: ['Appointments']
 		}),
+		// Видалення запису по id
 		deleteAppointment: builder.mutation({
 			query: (id) => ({
 				url: apiRoutes.appointments.delete(id),
@@ -123,10 +138,12 @@ export const api = createApi({
 			}),
 			invalidatesTags: (result, error, id) => ['Appointments', { type: 'Appointments', id }]
 		}),
+		// Отримання запису по id
 		getAppointmentById: builder.query({
 			query: (id) => apiRoutes.appointments.getById(id),
 			providesTags: (result, error, id) => [{ type: 'Appointments', id }]
 		}),
+		// Оновлення запису після редагування
 		updateAppointment: builder.mutation({
 			query: ({ id, ...data }) => ({
 				url: apiRoutes.appointments.update(id),
@@ -135,6 +152,7 @@ export const api = createApi({
 			}),
 			invalidatesTags: (result, error, id) => ['Appointments', { type: 'Appointments', id }]
 		}),
+		// Додавання нового пацієнту
 		addNewAppointment: builder.mutation({
 			query: (data) => ({
 				url: apiRoutes.appointments.create,
@@ -146,4 +164,26 @@ export const api = createApi({
 	}),
 })
 
-export const { useGetPatientsQuery, useGetFilteredByPatientNameQuery, useDeletePatientsMutation, useGetPatientByIdQuery, useUpdatePatientMutation, useAddNewPatientMutation, useGetDoctorsQuery, useGetAllAppointmentsQuery, useDeleteDoctorsMutation, useGetDoctorByIdQuery, useAddNewDoctorMutation, useUpdateDoctorMutation, useAddNewAppointmentMutation, useDeleteAppointmentMutation, useGetAppointmentByIdQuery, useGetFilteredAppointmentsByDateQuery, useGetFilteredAppointmentsByPatientNameQuery, useUpdateAppointmentMutation } = api
+export const {
+	// Пацієнти
+	useGetPatientsQuery,
+	useGetFilteredByPatientNameQuery,
+	useDeletePatientsMutation,
+	useGetPatientByIdQuery,
+	useUpdatePatientMutation,
+	useAddNewPatientMutation,
+	// Лікарі
+	useGetDoctorsQuery,
+	useDeleteDoctorsMutation,
+	useGetDoctorByIdQuery,
+	useAddNewDoctorMutation,
+	useUpdateDoctorMutation,
+	// Прийоми
+	useGetAllAppointmentsQuery,
+	useAddNewAppointmentMutation,
+	useDeleteAppointmentMutation,
+	useGetAppointmentByIdQuery,
+	useGetFilteredAppointmentsByDateQuery,
+	useGetFilteredAppointmentsByPatientNameQuery,
+	useUpdateAppointmentMutation
+} = api
