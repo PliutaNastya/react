@@ -10,9 +10,10 @@ function DoctorsForm() {
 	const { id } = useParams()
 	const navigate = useNavigate()
 
-	const { data: doctorData, isLoading } = useGetDoctorByIdQuery(id, { skip: !id })
+	const { data: doctorData } = useGetDoctorByIdQuery(id, { skip: !id })
 	const [updateDoctor, { isLoading: isEditing }] = useUpdateDoctorMutation()
 	const [addNewDoctor, { isLoading: isCreating }] = useAddNewDoctorMutation()
+	const isLoading = id ? isEditing : isCreating
 
 	useEffect(() => {
 		if (doctorData) setFormData(doctorData)

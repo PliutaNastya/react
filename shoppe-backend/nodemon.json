@@ -1,0 +1,8 @@
+{
+	"ignore": [
+		"public/*",
+		"*.log",
+		"node_modules/*",
+		"uploads/*"
+	]
+}

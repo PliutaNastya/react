@@ -31,13 +31,14 @@ function AppointmentsForm() {
 	const navigate = useNavigate()
 	
 	// Отримання даних записів
-	const { data: appointmentData, isLoading } = useGetAppointmentByIdQuery(id)
+	const { data: appointmentData } = useGetAppointmentByIdQuery(id)
 	// Отримання функцій оновлення та додавання записів
 	const [updateAppointment, { isLoading: isEditing }] = useUpdateAppointmentMutation()
 	const [addNewAppointment, { isLoading: isCreating }] = useAddNewAppointmentMutation()
 
 	// Отримання масиву даних для формування полів форми
 	const appointmentsFormFields = getAppointmentFormFields(doctorsOptions, patientOptions)
+	const isLoading = id ? isEditing : isCreating
 
 	// useEffect для заповнення полів форми, якщо дані існують
 	useEffect(() => {
