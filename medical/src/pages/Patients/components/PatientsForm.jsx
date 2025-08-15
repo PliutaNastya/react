@@ -15,8 +15,7 @@ function PatientsForm() {
 	const [updatePatient, { isLoading: isEditing }] = useUpdatePatientMutation()
 	const [addNewPatient, { isLoading: isCreating }] = useAddNewPatientMutation()
 
-	const isLoading = id ? isEditing : isCreating
-	
+	const isLoading = isEditing || isCreating
 
 	useEffect(() => {
 		if (patientData) setFormData(patientData)
@@ -33,9 +32,9 @@ function PatientsForm() {
 		e.preventDefault()
 
 		if (id) {
-			await updatePatient(formData)
+			await updatePatient(formData).unwrap()
 		} else {
-			await addNewPatient(formData)
+			await addNewPatient(formData).unwrap()
 			setFormData(() => emptyData)
 		}
 		navigate(frontRoutes.navigate.patients.main)
