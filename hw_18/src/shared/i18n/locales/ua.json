@@ -1,0 +1,84 @@
+{
+	"Home Page": {
+		"title": "Welcome !",
+		"button": "Click me",
+		"description": "Вітаємо у Firebase Shop!",
+		"menuLabel": "Головна"
+	},
+	"Login page": {
+		"menuLabel": "Увійти"
+	},
+	"Users page": {
+		"title": "Користувачі",
+		"menuLabel": "Користувачі"
+	},
+	"Edit User": {
+		"title": "Редагувати користувача",
+		"menuLabel": "Редагувати користувача"
+	},
+	"Products page": {
+		"title": "Каталог продуктів",
+		"productOwner": "Власник товару",
+		"menuLabel": "Товари"
+	},
+	"Edit Product": {
+		"title": "Редагування товару",
+		"menuLabel": "Редагувати товар"
+	},
+	"Add Product": {
+		"title": "Додавання товару",
+		"menuLabel": "Додати товар"
+	},
+	"Cart": {
+		"title": "Мій кошик",
+		"permission": "Тільки для авторизованих користувачів",
+		"price": "Ціна",
+		"sum": "Сума",
+		"totalPrice": "Загальна вартість",
+		"empty": "Кошик порожній",
+		"menuLabel": "Кошик"
+	},
+	"Favorites": {
+		"permission": "Тільки для авторизованих користувачів",
+		"title": "Обрані товари",
+		"menuLabel": "Обране"
+	},
+	"Not Found": {
+		"title": "Сторінку не знайдено"
+	},
+	"Forbidden": {
+		"title": "Доступ заборонено"
+	},
+	"common": {
+		"errorMessage": "Помилка",
+		"googleAuthError": "Помилка Google-автентифікації",
+		"loadingMessage": "Завантаження"
+	},
+	"buttons": {
+		"save": "Зберегти",
+		"add": "Додати",
+		"addProcessing": "Редагування...",
+		"edit": "Редагувати",
+		"editProcessing": "Додавання...",
+		"addProduct": "Додати продукт",
+		"addToFav": "Додати в обране",
+		"editUser": "Редагувати користувача",
+		"deleteUser": "Видалити користувача",
+		"delete": "Видалити",
+		"login": "Увійти",
+		"logout": "Вийти",
+		"signup": "Зареєструватися"
+	},
+	"inputs": {
+		"email": "Електронна пошта",
+		"name": "Ім'я",
+		"password": "Пароль",
+		"prodName": "Назва товару",
+		"price": "Ціна",
+		"imageUrl": "Посилання на зображення"
+	},
+	"alt": {
+		"delete": "Іконка видалення",
+		"edit": "Іконка редагування"
+	}
+}

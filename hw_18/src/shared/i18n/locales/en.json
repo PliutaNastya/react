@@ -1,0 +1,84 @@
+{
+	"Home Page": {
+		"title": "Welcome !",
+		"button": "Click me",
+		"description": "Welcome to Firebase Shop!",
+		"menuLabel": "Home"
+	},
+	"Login page": {
+		"menuLabel": "Log in"
+	},
+	"Users page": {
+		"title": "Users",
+		"menuLabel": "Users"
+	},
+	"Edit User": {
+		"title": "Edit user",
+		"menuLabel": "Edit user"
+	},
+	"Products page": {
+		"title": "Product catalog",
+		"productOwner": "Product owner",
+		"menuLabel": "Products"
+	},
+	"Edit Product": {
+		"title": "Edit product",
+		"menuLabel": "Edit product"
+	},
+	"Add Product": {
+		"title": "Add product",
+		"menuLabel": "Add product"
+	},
+	"Cart": {
+		"title": "My cart",
+		"permission": "Only for authenticated users",
+		"price": "Price",
+		"sum": "Sum",
+		"totalPrice": "Total cost",
+		"empty": "Cart is empty",
+		"menuLabel": "Cart"
+	},
+	"Favorites": {
+		"permission": "Only for authenticated users",
+		"title": "Favorite products",
+		"menuLabel": "Favorites"
+	},
+	"Not Found": {
+		"title": "Page not found"
+	},
+	"Forbidden": {
+		"title": "Access denied"
+	},
+	"common": {
+		"errorMessage": "Error",
+		"googleAuthError": "Google authentication error",
+		"loadingMessage": "Loading"
+	},
+	"buttons": {
+		"save": "Save",
+		"add": "Add",
+		"addProcessing": "Editing...",
+		"edit": "Edit",
+		"editProcessing": "Adding...",
+		"addProduct": "Add product",
+		"addToFav": "Add to favorites",
+		"editUser": "Edit user",
+		"deleteUser": "Delete user",
+		"delete": "Delete",
+		"login": "Log in",
+		"logout": "Log out",
+		"signup": "Sign up"
+	},
+	"inputs": {
+		"email": "Email",
+		"name": "Name",
+		"password": "Password",
+		"prodName": "Product name",
+		"price": "Price",
+		"imageUrl": "Image URL"
+	},
+	"alt": {
+		"delete": "Delete icon",
+		"edit": "Edit icon"
+	}
+}
