@@ -1,19 +1,27 @@
-import { useGetUserFavoriteQuery } from "@/entities/favoriteItem/api/favoriteItemApi"
-import FavoriteItemCardWithActions from "../FavoriteItemCardWithActions/FavoriteItemCardWithActions"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
+import { useGetFavoritesLocalizedQuery } from '@/entities/favoriteItem/api/favoriteItemApi'
+import FavoriteItemCardWithActions from '../FavoriteItemCardWithActions/FavoriteItemCardWithActions'
 
 function FavoriteList({ userId }) {
-	const { data: favorites = [], isLoading } = useGetUserFavoriteQuery(userId)
-	const { t } = useTranslation()
-	const items = Object.entries(favorites).filter(([_, item]) => item)
+	const { i18n, t } = useTranslation()
+	const locale = i18n.resolvedLanguage || 'uk'
+
+	const { data: items = [], isLoading } =
+		useGetFavoritesLocalizedQuery({ userId, locale })
 
 	if (isLoading) return <div>{t('common.loadingMessage')}...</div>
 
+	if (!items.length) return <div>{t('Favorites.empty', 'Список порожній')}</div>
+
 	return (
 		<div>
-			{items.length === 0 && <div>{t('Cart.empty')}</div>}
-			{items.map(([productId, item]) => (
-				<FavoriteItemCardWithActions key={productId} item={item} userId={userId} productId={productId} />
+			{items.map((item) => (
+				<FavoriteItemCardWithActions
+					key={item.id}
+					item={item}
+					userId={userId}
+					productId={item.id}
+				/>
 			))}
 		</div>
 	)

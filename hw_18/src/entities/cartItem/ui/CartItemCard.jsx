@@ -7,7 +7,7 @@ export default function CartItemCard({ item, children }) {
 
 	return (
 		<div style={{ border: '1px solid #ccc', margin: 8, padding: 8 }}>
-			<div>{item.name}</div>
+			<div>{item._tr.title}</div>
 			<div>{t('Cart.price')}: {item.price}</div>
 			<div>{t('Cart.sum')}: {total}</div>
 			{children}

@@ -40,6 +40,7 @@
 	},
 	"Favorites": {
 		"permission": "Only for authenticated users",
+		"empty": "Favorites list is empty",
 		"title": "Favorite products",
 		"menuLabel": "Favorites"
 	},

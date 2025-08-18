@@ -1,24 +1,31 @@
 import { useTranslation } from 'react-i18next'
-import { useGetUserCartQuery } from '../../entities/cartItem/api/cartItemApi'
+import { useGetCartLocalizedQuery } from '../../entities/cartItem/api/cartItemApi'
 import CartItemCardWithActions from '../CartItemCardWithActions/CartItemCardWithActions'
 
 export default function CartList({ userId }) {
-	const { data: cart = {}, isLoading } = useGetUserCartQuery(userId)
-	const items = Object.entries(cart).filter(([_, item]) => item)
-	const total = items.reduce(
-		(sum, [_, item]) => sum + (item.price || 0) * (item.quantity || 1),
-		0
-	)
-	const { t } = useTranslation()
+	const { i18n, t } = useTranslation()
+	const locale = i18n.resolvedLanguage || 'uk'
+
+	// очікуємо масив елементів
+	const { data: items = [], isLoading } = useGetCartLocalizedQuery({ userId, locale })
+
+	const total = items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 1), 0)
 
 	if (isLoading) return <div>{t('common.loadingMessage')}...</div>
 
 	return (
 		<div>
 			{items.length === 0 && <div>{t('Cart.empty')}</div>}
-			{items.map(([productId, item]) => (
-				<CartItemCardWithActions key={productId} item={item} userId={userId} productId={productId} />
+
+			{items.map((item) => (
+				<CartItemCardWithActions
+					key={item.id}
+					item={item}
+					userId={userId}
+					productId={item.id}
+				/>
 			))}
+
 			{items.length > 0 && (
 				<div style={{ marginTop: 16, fontWeight: 'bold' }}>
 					{t('Cart.totalPrice')}: {total}

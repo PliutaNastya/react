@@ -28,19 +28,21 @@ class DbOperations {
 		await setDoc(doc(this.collectionRef, userId), cartObj)
 		return true
 	}
+	async setCartProduct(userId, productId) {
+		await setDoc(doc(this.collectionRef, userId),
+			{ [productId]: { addedAt: new Date().toISOString() } },
+			{ merge: true }
+		)
+		return true
+	}
 	// update/add one product in cart for user_id
 	async updateCartProduct(userId, productId, productData) {
-		await updateDoc(doc(this.collectionRef, userId), {
-			[productId]: productData,
-		})
+		await setDoc(doc(this.collectionRef, userId), { [productId]: productData }, { merge: true })
 		return true
 	}
 	// remove one product from cart for user_id
 	async removeCartProduct(userId, productId) {
-		// Видалення: оновлюємо поле на null (старий робочий варіант)
-		await updateDoc(doc(this.collectionRef, userId), {
-			[productId]: null,
-		})
+		await updateDoc(doc(this.collectionRef, userId), { [productId]: deleteField() }) 
 		return true
 	}
 	constructor(name) {
@@ -115,8 +117,15 @@ class DbOperations {
 		})
 		return true
 	}
-	async addFavoriteProduct(userId, productId, productData = true) {
-		await setDoc(doc(this.collectionRef, userId), { [productId]: productData }, { merge: true })
+	// async addFavoriteProduct(userId, productId, productData = true) {
+	// 	await setDoc(doc(this.collectionRef, userId), { [productId]: productData }, { merge: true })
+	// 	return true
+	// }
+	async addFavoriteProduct(userId, productId) {
+		await setDoc(doc(this.collectionRef, userId),
+			{ [productId]: { addedAt: new Date().toISOString() } },
+			{ merge: true }
+		)
 		return true
 	}
 
