@@ -1,10 +1,13 @@
-import { useGetAllProductsQuery } from '@/entities/product/api/productApi'
+import { useGetAllProductsLocalizedQuery } from '@/entities/product/api/productApi'
 import { ProductCardWithActions } from '../ProductCardWithActions'
 import { useTranslation } from 'react-i18next'
 
 export default function ProductsList({ user, role }) {
-	const { data: products = [], isLoading } = useGetAllProductsQuery()
-	const {t} = useTranslation()
+	const { t, i18n } = useTranslation()
+	const locale = i18n.resolvedLanguage || 'uk'
+
+	const { data: products = [], isLoading } = useGetAllProductsLocalizedQuery(locale)
+	
 
 	if (isLoading)
 		return (

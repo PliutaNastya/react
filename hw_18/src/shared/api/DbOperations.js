@@ -23,13 +23,11 @@ class DbOperations {
 		if (!snap.exists()) return {}
 		return snap.data() // { product_id: { ... } }
 	}
-
 	// set full cart object for user_id
 	async setCartByUserId(userId, cartObj) {
 		await setDoc(doc(this.collectionRef, userId), cartObj)
 		return true
 	}
-
 	// update/add one product in cart for user_id
 	async updateCartProduct(userId, productId, productData) {
 		await updateDoc(doc(this.collectionRef, userId), {
@@ -37,7 +35,6 @@ class DbOperations {
 		})
 		return true
 	}
-
 	// remove one product from cart for user_id
 	async removeCartProduct(userId, productId) {
 		// Видалення: оновлюємо поле на null (старий робочий варіант)
@@ -49,12 +46,11 @@ class DbOperations {
 	constructor(name) {
 		this.collectionRef = collection(db, name)
 	}
-
+	// --- PRODUCTS SPECIALIZED METHODS ---
 	async getAll() {
 		const snapshot = await getDocs(this.collectionRef)
 		return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 	}
-
 	async getAllPaginated({ page = 1, perPage = 6, cursors = [] }) {
 		let q
 
@@ -85,20 +81,17 @@ class DbOperations {
 
 		return { data, cursor: lastVisible, hasMore }
 	}
-
 	async getById(id) {
 		const snap = await getDoc(doc(this.collectionRef, id))
 		return { id: snap.id, ...snap.data() }
 	}
-
 	async setWithId(id, data) {
 		await setDoc(doc(this.collectionRef, id), data)
 		return true
 	}
-
 	async add(data) {
-		await addDoc(this.collectionRef, data)
-		return true
+		const ref = await addDoc(this.collectionRef, data)
+		return ref.id
 	}
 	async update(id, data) {
 		await updateDoc(doc(this.collectionRef, id), data)
@@ -108,7 +101,7 @@ class DbOperations {
 		await deleteDoc(doc(this.collectionRef, id))
 		return true
 	}
-
+	// --- FAVORITES SPECIALIZED METHODS ---
 	// get favorite object for user_id
 	async getFavoriteByUserId(userId) {
 		const snap = await getDoc(doc(this.collectionRef, userId))
@@ -122,11 +115,36 @@ class DbOperations {
 		})
 		return true
 	}
-
 	async addFavoriteProduct(userId, productId, productData = true) {
 		await setDoc(doc(this.collectionRef, userId), { [productId]: productData }, { merge: true })
 		return true
 	}
+
+	// 1) Часткове оновлення конкретної локалі (merge = true робить глибоке злиття)
+	async setProductLocale(productId, locale, values) {
+		await setDoc(doc(this.collectionRef, productId), { i18n: { [locale]: values } }, { merge: true })
+		return true
+	}
+
+	// 2) Отримати продукт і одразу підставити потрібну мову з фолбеком на uk
+	async getProductLocalized(productId, locale = 'uk') {
+		const snap = await getDoc(doc(this.collectionRef, productId))
+		if (!snap.exists()) return null
+		const data = snap.data()
+		const tr = data?.i18n?.[locale] || data?.i18n?.uk || {}
+		return { id: snap.id, ...data, _tr: tr } // у UI - _tr.title/_tr.description
+	}
+
+	// 3) Список продуктів з підставленою локаллю
+	async getAllLocalized(locale = 'uk') {
+		const snapshot = await getDocs(this.collectionRef)
+		return snapshot.docs.map(d => {
+			const obj = d.data()
+			const tr = obj?.i18n?.[locale] || obj?.i18n?.uk || {}
+			return { id: d.id, ...obj, _tr: tr }
+		})
+	}
+
 }
 
 export default DbOperations

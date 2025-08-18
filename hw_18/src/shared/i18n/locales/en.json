@@ -75,7 +75,8 @@
 		"password": "Password",
 		"prodName": "Product name",
 		"price": "Price",
-		"imageUrl": "Image URL"
+		"imageUrl": "Image URL",
+		"description": "Description"
 	},
 	"alt": {
 		"delete": "Delete icon",

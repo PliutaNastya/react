@@ -19,7 +19,7 @@ export function ProductCardWithActions({ product, user, role, onDeleted }) {
 
 	return (
 		<ProductCard product={product}>
-			<div className="flex flex-wrap gap-2 w-full justify-between mt-2">
+			<div className="flex flex-wrap gap-2 w-full mt-2">
 				<div className="flex gap-2 flex-wrap">
 					{canAddToCart && <CartAddButton product={product} userId={uid} />}
 					{canAddToFavorite && (

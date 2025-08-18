@@ -38,7 +38,7 @@ export function UserInfo() {
 				alt="user avatar"
 				className="w-8 h-8 rounded-full object-cover border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
 			/>
-			<span className="font-medium">
+			<span className="font-medium break-all">
 				{user.email} - {user.role}{' '}
 			</span>
 			<button
